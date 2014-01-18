@@ -1,0 +1,11 @@
+%h1 Sign up
+
+- if @user.errors.any?
+  - @user.errors.full_messages.each do |msg|
+    .alert.alert-danger= msg
+
+%form{ role: 'form', method: 'post', action: create_user_url }
+  .form-group
+    %input.form-control{ type: 'email', name: 'email', placeholder: 'Enter email address', value: @user.email }
+  .form-group
+    %button.btn.btn-default{ type: 'submit' } Submit

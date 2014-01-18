@@ -1,0 +1,34 @@
+!!!
+%html{ :lang=>'en' }
+  %head
+    %title Poipond
+    = stylesheet_link_tag :application
+    = javascript_include_tag :application
+    %link{ :href=>'//api.tiles.mapbox.com/mapbox.js/v1.6.0/mapbox.css', :rel=>'stylesheet' }
+    %script{ :src=>'//api.tiles.mapbox.com/mapbox.js/v1.6.0/mapbox.js' }
+    = csrf_meta_tag
+    %meta{ :name=>'viewport', :content=>'width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no' }
+  %body
+    #map
+    %nav.navbar.navbar-default{ :role=>'navigation' }
+      %div.navbar-header
+        %button.navbar-toggle{ :type=>'button', :'data-toggle'=>'collapse', :'data-target'=>'#navcoll' }
+          %span.sr-only Toggle navigation
+          %span.icon-bar
+          %span.icon-bar
+          %span.icon-bar
+        %a.navbar-brand{ :href=>'/' } Poipond
+      %div.collapse.navbar-collapse#navcoll
+        %ul.nav.navbar-nav
+          %li.active
+            %a{ :href=>'#' } Link
+          %li
+            %a{ :href=>'#' }Link
+        - if current_user
+          %ul.nav.navbar-nav.navbar-right
+            %li
+              %a{ :href=> logout_url } Log out
+    .container
+      - unless current_user || (params[:controller]=='users' && (params[:action]=='create' || params[:action]=='new'))
+        %a.btn.btn-primary.btn-lg.btn-block{ href: '/auth/osm', type: 'button' } Login with OSM
+      = yield
