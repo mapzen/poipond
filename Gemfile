@@ -8,7 +8,6 @@ gem 'uglifier'
 gem 'coffee-rails'
 gem 'therubyracer', platforms: :ruby
 gem 'jquery-rails'
-gem 'turbolinks'
 gem 'jbuilder'
 gem 'haml-rails'
 gem 'omniauth-osm'
