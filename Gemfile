@@ -12,6 +12,7 @@ gem 'turbolinks'
 gem 'jbuilder'
 gem 'haml-rails'
 gem 'omniauth-osm'
+gem 'unicorn'
 
 group :doc do
   gem 'sdoc', require: false
