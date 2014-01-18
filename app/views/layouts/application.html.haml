@@ -29,19 +29,25 @@
             %li
               %a{ :href=> logout_url } Log out
     .container
-      - unless current_user || (params[:controller]=='users' && (params[:action]=='create' || params[:action]=='new'))
-        %a.btn.btn-primary.btn-lg.btn-block{ href: '/auth/osm', type: 'button' } Login with OSM
       = yield
     %nav.navbar.navbar-default.navbar-fixed-bottom{ :role=>'navigation' }
       .text-center
-        %a.btn.btn-primary.btn-lg.navbar-btn#check-in{ :href=>'#', :'data-toggle'=>'modal', :'data-target'=>'#poi-results', :onclick=>'checkIn()' }
-          %span.glyphicon.glyphicon-map-marker
+        - unless current_user || (params[:controller]=='users' && (params[:action]=='create' || params[:action]=='new'))
+          %a.btn.btn-primary.btn-lg.navbar-btn{ href: '/auth/osm', type: 'button' } Login with OSM
+        - else
+          %a.btn.btn-primary.btn-lg.navbar-btn#check-in{ :href=>'#', :'data-toggle'=>'modal', :'data-target'=>'#poi-results', :onclick=>'checkIn()' }
+            %span.glyphicon.glyphicon-map-marker
     %div.modal.fade#poi-results{ :tabindex=>'-1', :role=>'dialog', :'aria-labelledby'=>'poi-results-label', :'aria-hidden'=>'true' }
       %div.modal-dialog
         %div.modal-content
           %div.modal-header
             %button.close{ :type=>'button', :'data-dismiss'=>'modal', :'aria-hidden'=>'true' } &times;
-            %h4.modal-title#poi-results-label Nearby POIs
+            %h4.modal-title#poi-results-label
+              Nearby POIs
           %div.modal-body
-            #ul.list-group#poi-results-list
+            %p.text-center
+              Not here?
+              %strong
+                %a{ :href=>'#' } Add a new POI
+            %ul.list-group#poi-results-list
           %div.modal-footer POIs &copy; OpenStreetMap contributors (that's you)

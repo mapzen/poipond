@@ -18,7 +18,6 @@ function checkIn() {
         if (geoJson.features.hasOwnProperty(key)) {
           obj = geoJson.features[key];
           var distance = getDistance(lat, lng, obj.geometry.coordinates[1], obj.geometry.coordinates[0]);
-console.log(obj.properties);
           $('#poi-results-list').append('<a href="#" class="list-group-item">' + obj.properties.name + '<br/>' + getAddress(obj) + '<br/>' + distance + ' miles</a>')
         }
       }
@@ -51,7 +50,7 @@ function getAddress(obj) {
     if (obj.properties.street_number!=null) {
       address += obj.properties.street_number + ' ';
     }
-    address += obj.properties.street_number;
+    address += obj.properties.street_name;
   }
   return address;
 }
