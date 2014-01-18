@@ -12,6 +12,7 @@ gem 'jbuilder'
 gem 'haml-rails'
 gem 'omniauth-osm'
 gem 'unicorn'
+gem 'sidekiq'
 
 group :doc do
   gem 'sdoc', require: false
