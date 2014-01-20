@@ -69,7 +69,7 @@ function getDistance(lat1, lon1, lat2, lon2) {
 }
 
 $(document).ready(function() {
-  map = L.mapbox.map('map', 'randyme.gajlngfe', { zoomControl: false});
+  map = L.mapbox.map('map', 'randyme.h29f04e6', { zoomControl: false});
   map.locate({setView: true, maxZoom: 16, watch: true, enableHighAccuracy: true});
   map.on('locationfound', onLocationFound);
   map.on('locationerror', onLocationError);
