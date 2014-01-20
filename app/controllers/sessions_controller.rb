@@ -3,6 +3,7 @@ class SessionsController < ApplicationController
   def create
     auth = auth_hash(request.env['omniauth.auth'])
     if user = User.find_by_provider_and_uid(auth[:provider], auth[:uid])
+      user.update_attributes(auth)
       session[:user_id] = user.id
       redirect_to home_url
     else

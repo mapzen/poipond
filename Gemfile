@@ -12,6 +12,8 @@ gem 'jbuilder'
 gem 'haml-rails'
 gem 'omniauth-osm'
 gem 'unicorn'
+gem 'oauth'
+gem 'xml-simple'
 
 group :doc do
   gem 'sdoc', require: false
