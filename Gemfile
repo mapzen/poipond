@@ -14,6 +14,8 @@ gem 'omniauth-osm'
 gem 'unicorn'
 gem 'oauth'
 gem 'xml-simple'
+gem 'sidekiq'
+gem 'sinatra'
 
 group :doc do
   gem 'sdoc', require: false
