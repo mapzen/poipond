@@ -26,18 +26,22 @@ class Poi
     self.osm_type = get_type(params[:osm_type])
     raise 'Missing type' if osm_type.nil?
     self.osm_id = params[:osm_id]
-    self.lat = params[:lat]
-    self.lon = params[:lon]
-    self.name = params[:name]
-    self.addr_housenumber = params[:addr_housenumber]
-    self.addr_street = params[:addr_street]
-    self.addr_city = params[:addr_city]
-    self.addr_postcode = params[:addr_postcode]
-    self.phone = params[:phone]
-    self.website = params[:website]
-    self.amenity = params[:amenity]
-    self.cuisine = params[:cuisine]
     self.tags = params[:tags] || {}
+    self.update_attributes(params)
+  end
+
+  def update_attributes(params={})
+    self.lat ||= params[:lat]
+    self.lon ||= params[:lon]
+    self.name ||= params[:name]
+    self.addr_housenumber ||= params[:addr_housenumber]
+    self.addr_street ||= params[:addr_street]
+    self.addr_city ||= params[:addr_city]
+    self.addr_postcode ||= params[:addr_postcode]
+    self.phone ||= params[:phone]
+    self.website ||= params[:website]
+    self.amenity ||= params[:amenity]
+    self.cuisine ||= params[:cuisine]
   end
 
   def save
@@ -50,8 +54,9 @@ class Poi
       # edit existing
       url = "#{OSM_API_BASE}/#{osm_type}/#{osm_id}"
     end
-    user.osm_access_token.put(url, poi_xml, {'Content-Type'=>'application/xml'})
+    response = user.osm_access_token.put(url, poi_xml, {'Content-Type'=>'application/xml'})
     changeset.close
+    raise response.class.name unless response.code=='200'
   end
 
   def load_remote_data
@@ -84,17 +89,18 @@ class Poi
   end
 
   def xml_tags
-    tags[:name] = name unless name.nil?
-    tags[:addr_housenumber] = addr_housenumber unless addr_housenumber.nil?
-    tags[:addr_street] = addr_street unless addr_street.nil?
-    tags[:addr_city] = addr_city unless addr_city.nil?
-    tags[:addr_postcode] = addr_postcode unless addr_postcode.nil?
-    tags[:phone] = phone unless phone.nil?
-    tags[:website] = website unless website.nil?
-    tags[:amenity] = amenity unless amenity.nil?
-    tags[:cuisine] = cuisine unless cuisine.nil?
+    self.tags[:name] = name unless name.nil?
+    self.tags[:addr_housenumber] = addr_housenumber unless addr_housenumber.nil?
+    self.tags[:addr_street] = addr_street unless addr_street.nil?
+    self.tags[:addr_city] = addr_city unless addr_city.nil?
+    self.tags[:addr_postcode] = addr_postcode unless addr_postcode.nil?
+    self.tags[:phone] = phone unless phone.nil?
+    self.tags[:website] = website unless website.nil?
+    self.tags[:amenity] = amenity unless amenity.nil?
+    self.tags[:cuisine] = cuisine unless cuisine.nil?
+    self.tags = self.tags.delete_if { |k,v| v.blank? }
     xml = ''
-    tags.each do |k,v|
+    self.tags.each do |k,v|
       key = k.to_s.gsub('_', ':')
       xml << "<tag k=\"#{key}\" v=\"#{v}\"/>"
     end

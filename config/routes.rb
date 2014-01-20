@@ -12,5 +12,6 @@ Poipond::Application.routes.draw do
   get '/pois/:osm_id' => 'pois#show', as: :poi
   get '/pois/new' => 'pois#new', as: :new_poi
   post '/pois/create' => 'pois#create', as: :create_poi
+  post '/pois/update/:osm_id' => 'pois#update', as: :update_poi
 
 end
