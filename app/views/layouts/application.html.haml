@@ -9,6 +9,11 @@
     %script{ :src=>'//api.tiles.mapbox.com/mapbox.js/v1.6.0/mapbox.js' }
     = csrf_meta_tag
     %meta{ :name=>'viewport', :content=>'width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no' }
+    %meta{ :name=>'mobile-web-app-capable', :content=>'yes' }
+    %link{ :rel=>'shortcut icon', :sizes=>'196x196', :href=>'/assets/icon_196.png' }
+    %link{ :rel=>'shortcut icon', :sizes=>'128x128', :href=>'/assets/icon_128.png' }
+    %link{ :rel=>'apple-touch-icon', :sizes=>'128x128', :href=>'/assets/icon_128.png' }
+    %link{ :rel=>'apple-touch-icon-precomposed', :sizes=>'128x128', :href=>'/assets/icon_128.png' }
   %body
     #map
     %nav.navbar.navbar-default.navbar-fixed_top{ :role=>'navigation' }
