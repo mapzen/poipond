@@ -17,9 +17,14 @@ class PoisController < ApplicationController
   end
 
   def new
+    @poi = Poi.new(:user=>current_user, :osm_type=>'node')
   end
 
   def create
+    @poi = Poi.new(:user=>current_user, :osm_type=>'node')
+    @poi.update_attributes(params.symbolize_keys)
+    @poi.save
+    redirect_to '/'
   end
 
   private
