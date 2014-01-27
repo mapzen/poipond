@@ -7,6 +7,16 @@ development:
   host: localhost
   socket: /var/run/mysqld/mysqld.sock
 
+osm_development:
+  adapter: postgresql
+  encoding: unicode
+  database: osm-nyc
+  pool: 5
+  username: randy
+  password: 
+  host: localhost
+  port: 5432
+
 test:
   adapter: mysql2
   encoding: utf8

@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class PoisControllerTest < ActionController::TestCase
+class Api::V0::PoisControllerTest < ActionController::TestCase
   # test "the truth" do
   #   assert true
   # end

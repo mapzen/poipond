@@ -1,5 +1,0 @@
-#poi-map
-%script
-  var map = L.mapbox.map('poi-map', 'randyme.h29f04e6', { center:[#{@poi.lat}, #{@poi.lon}], zoom: 19});
-  var marker = L.marker([#{@poi.lat}, #{@poi.lon}], { color: '#000' });
-  marker.addTo(map);

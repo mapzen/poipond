@@ -1,5 +1,5 @@
 !!!
-%html{ :lang=>'en' }
+%html{ :lang=>'en', :'ng-app'=>'ng-app' }
   %head
     %title POI Pond
     = stylesheet_link_tag :application
@@ -8,6 +8,7 @@
     %link{ :href=>'//api.tiles.mapbox.com/mapbox.js/v1.6.0/mapbox.css', :rel=>'stylesheet' }
     %script{ :src=>'//api.tiles.mapbox.com/mapbox.js/v1.6.0/mapbox.js' }
     = csrf_meta_tag
+    %meta{ :charset=>'utf-8' }
     %meta{ :name=>'viewport', :content=>'width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no' }
     %meta{ :name=>'mobile-web-app-capable', :content=>'yes' }
     %link{ :rel=>'shortcut icon', :sizes=>'196x196', :href=>'/assets/icon_196.png' }

@@ -1,0 +1,10 @@
+json.id @poi.id
+json.osm_type @poi.osm_type
+json.osm_id @poi.osm_id
+json.name @poi.name
+json.addr_housenumber @poi.addr_housenumber
+json.addr_street @poi.addr_street
+json.addr_city @poi.addr_city
+json.addr_postcode @poi.addr_postcode
+json.lat @poi.lat.to_f.round(6)
+json.lon @poi.lon.to_f.round(6)

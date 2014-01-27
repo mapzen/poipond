@@ -11,7 +11,42 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140120132342) do
+ActiveRecord::Schema.define(version: 20140127004025) do
+
+  create_table "categories", force: true do |t|
+    t.string   "name"
+    t.integer  "parent_id"
+    t.text     "tags"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "poi_categories", force: true do |t|
+    t.integer "poi_id"
+    t.integer "category_id"
+  end
+
+  add_index "poi_categories", ["poi_id", "category_id"], name: "index_poi_categories_on_poi_id_and_category_id", unique: true, using: :btree
+
+  create_table "pois", force: true do |t|
+    t.string   "osm_type"
+    t.string   "osm_id"
+    t.string   "name"
+    t.string   "addr_housenumber"
+    t.string   "addr_street"
+    t.string   "addr_city"
+    t.string   "addr_postcode"
+    t.string   "phone"
+    t.string   "website"
+    t.string   "version"
+    t.text     "tags"
+    t.decimal  "lat",              precision: 15, scale: 10
+    t.decimal  "lon",              precision: 15, scale: 10
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "pois", ["osm_type", "osm_id"], name: "index_pois_on_osm_type_and_osm_id", unique: true, using: :btree
 
   create_table "users", force: true do |t|
     t.string   "provider",                               null: false

@@ -1,37 +1,21 @@
 function checkIn() {
-  var query_string = '/closest?lat=' + lat + '&lng=' + lng + '&type=poi';
   $.ajax({
     type: 'GET',
     dataType: "json",
-    url: 'http://api-pelias-test.mapzen.com' + query_string,
+    url: 'http://localhost:3000/api/v0/pois/closest?lat=' + lat + '&lon=' + lon,
     success: function(geoJson) {
       $('#poi-results-list').empty();
-      for (key in geoJson.features) {
-        if (geoJson.features.hasOwnProperty(key)) {
-          obj = geoJson.features[key];
-          var distance = getDistance(lat, lng, obj.geometry.coordinates[1], obj.geometry.coordinates[0]);
+      for (key in geoJson) {
+        if (geoJson.hasOwnProperty(key)) {
+          obj = geoJson[key];
           $('#poi-results-list').append([
-            '<a href="/pois/' + obj.properties.osm_id + '" class="list-group-item">' + obj.properties.name,
-            '<br/>' + getAddress(obj) + '<br/>' + distance + ' miles</a>'
+            '<a href="/pois/' + obj.osm_id + '" class="list-group-item">',
+            obj.name + '<br/>' + obj.full_addr + '<br/>' + obj.distance + ' miles</a>'
           ].join(''))
         }
       }
     }
   });
-}
-
-function getAddress(obj) {
-  var address = '';
-  if (obj.properties.street_name==null) {
-    address = 'No address';
-  }
-  else {
-    if (obj.properties.street_number!=null) {
-      address += obj.properties.street_number + ' ';
-    }
-    address += obj.properties.street_name;
-  }
-  return address;
 }
 
 $(document).ready(function() {
@@ -46,7 +30,7 @@ $(document).ready(function() {
     markers.push(marker);
     marker.addTo(map);
     lat = e.latlng.lat;
-    lng = e.latlng.lng;
+    lon = e.latlng.lng;
   });
   map.on('locationerror', function (e) {
     console.log(e.message);

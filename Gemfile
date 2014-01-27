@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails'
+gem 'pg'
 gem 'mysql2'
 gem 'sass-rails'
 gem 'bootstrap-sass'
@@ -16,6 +17,7 @@ gem 'oauth'
 gem 'xml-simple'
 gem 'sidekiq'
 gem 'sinatra'
+gem 'angularjs-rails'
 
 group :doc do
   gem 'sdoc', require: false
