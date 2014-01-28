@@ -7,7 +7,7 @@ class Poi < ActiveRecord::Base
   has_many :poi_categories
   has_many :categories, through: :poi_categories
 
-  validates :osm_type, :osm_id, :name, :lat, :lon, presence: true
+  validates :osm_type, :name, :lat, :lon, presence: true
   validates :osm_type, inclusion: { in: %w(node way relation) }
 
   scope :closest, lambda { |lat, lon, count=10, distance=1|
@@ -40,16 +40,18 @@ class Poi < ActiveRecord::Base
   end
 
   def sync_to_osm(user)
-    self.save
-    return false unless persisted?
     changeset = Changeset.new(:user=>user)
     changeset.create
     # edit existing if persisted, otherwise create new
-    url = persisted? ? "#{OSM_API_BASE}/#{osm_type}/#{osm_id}" : "#{OSM_API_BASE}/#{osm_type}/create"
+    url = osm_id.nil? ? "#{OSM_API_BASE}/#{osm_type}/create" : "#{OSM_API_BASE}/#{osm_type}/#{osm_id}"
     xml = to_xml(changeset, user)
     response = user.osm_access_token.put(url, xml, {'Content-Type'=>'application/xml'})
     changeset.close
-    raise response.class.name unless response.code=='200'
+    if response.code=='200'
+      self.update_attributes(:osm_id=>response.body)
+    else
+      raise response.class.name
+    end
   end
 
   def display_category
@@ -94,16 +96,15 @@ class Poi < ActiveRecord::Base
     self.tags[:addr_postcode] = addr_postcode unless addr_postcode.nil?
     self.tags[:phone] = phone unless phone.nil?
     self.tags[:website] = website unless website.nil?
+    categories.map(&:tags).each { |th| self.tags = tags.merge(th) }
     self.tags = self.tags.delete_if { |k,v| v.blank? }
     xml = ''
     self.tags.each do |k,v|
       key = k.to_s.gsub('_', ':')
-      xml << "<tag k=\"#{key}\" v=\"#{v}\"/>"
+      val = CGI::escapeHTML(v)
+      xml << "<tag k=\"#{key}\" v=\"#{val}\"/>"
     end
     xml
-  end
-
-  def get_category_id
   end
 
 end

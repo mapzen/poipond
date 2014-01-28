@@ -9,6 +9,7 @@ Poipond::Application.routes.draw do
   get '/logout' => 'sessions#destroy', as: :logout
 
   resources :pois
+  get '/pois/new/choose_category(/:category_id)' => 'pois#choose_category', as: :choose_category
 
   get '/api/v0/pois/closest' => 'api/v0/pois#closest', :defaults => { :format => "json" }
 

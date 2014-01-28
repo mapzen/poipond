@@ -1,0 +1,3 @@
+.list-group
+  - @categories.each do |category|
+    %a.list-group-item{ href: "/pois/new/choose_category/#{category.id}" }= category.name

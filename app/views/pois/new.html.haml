@@ -1,4 +1,10 @@
-= form_for @poi, url: { action: "create" }, html: { role: 'form' } do |f|
+%ol.breadcrumb
+  - if @category.parent
+    %li
+      %a{ :href=>'#' }= @category.parent.name
+  %li
+    %a{ :href=>'#' }= @category.name
+= form_for @poi, url: { action: "create", category_id: params[:category_id] }, html: { role: 'form' } do |f|
   .container
     .col-md-8
       .form-group
