@@ -17,7 +17,6 @@ gem 'oauth'
 gem 'xml-simple'
 gem 'sidekiq'
 gem 'sinatra'
-gem 'angularjs-rails'
 
 group :doc do
   gem 'sdoc', require: false

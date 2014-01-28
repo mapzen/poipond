@@ -1,5 +1,5 @@
 !!!
-%html{ :lang=>'en', :'ng-app'=>'ng-app' }
+%html{ :lang=>'en' }
   %head
     %title POI Pond
     = stylesheet_link_tag :application
@@ -46,17 +46,4 @@
         - elsif current_user && params[:controller]=='home'
           %a.btn.btn-primary.btn-lg.navbar-btn#check-in{ :href=>'#', :'data-toggle'=>'modal', :'data-target'=>'#poi-results', :onclick=>'checkIn()' }
             %span.glyphicon.glyphicon-map-marker
-    %div.modal.fade#poi-results{ :tabindex=>'-1', :role=>'dialog', :'aria-labelledby'=>'poi-results-label', :'aria-hidden'=>'true' }
-      %div.modal-dialog
-        %div.modal-content
-          %div.modal-header
-            %button.close{ :type=>'button', :'data-dismiss'=>'modal', :'aria-hidden'=>'true' } &times;
-            %h4.modal-title#poi-results-label
-              Nearby POIs
-          %div.modal-body
-            %p.text-center
-              Not here?
-              %strong
-                %a{ :href=>'/pois/new' } Add a new POI
-            %ul.list-group#poi-results-list
-          %div.modal-footer POIs &copy; OpenStreetMap contributors (that's you)
+    = render :partial => 'home/poi_results'

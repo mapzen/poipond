@@ -8,10 +8,8 @@ Poipond::Application.routes.draw do
   post '/sessions/create' => 'sessions#create', as: :login
   get '/logout' => 'sessions#destroy', as: :logout
 
-  # api
-  post '/api/v0/pois/create' => 'api/v0/pois#create'
-  post '/api/v0/pois/:id' => 'api/v0/pois#update'
+  resources :pois
+
   get '/api/v0/pois/closest' => 'api/v0/pois#closest', :defaults => { :format => "json" }
-  get '/api/v0/pois/:id' => 'api/v0/pois#show', :defaults => { :format => "json" }
 
 end

@@ -1,0 +1,46 @@
+= form_for @poi, url: { action: "create" }, html: { role: 'form' } do |f|
+  .container
+    .col-md-8
+      .form-group
+        %label{ for: 'name' } Name
+        = f.text_field :name, class: 'form-control input-lg', id: 'name'
+      .form-group
+        %label{ for: 'addr_housenumber' } Housenumber
+        = f.text_field :addr_housenumber, class: 'form-control input-lg', id: 'addr_housenumber'
+      .form-group
+        %label{ for: 'addr_street' } Street
+        = f.text_field :addr_street, class: 'form-control input-lg', id: 'addr_street'
+      .form-group
+        %label{ for: 'addr_city' } City
+        = f.text_field :addr_city, class: 'form-control input-lg', id: 'addr_city'
+      .form-group
+        %label{ for: 'addr_postcode' } Postcode
+        = f.text_field :addr_postcode, class: 'form-control input-lg', id: 'addr_postcode'
+      .form-group
+        %label{ for: 'phone' } Phone
+        = f.text_field :phone, class: 'form-control input-lg', id: 'phone'
+      .form-group
+        %label{ for: 'website' } Website
+        = f.text_field :website, class: 'form-control input-lg', id: 'website'
+    .col-md-4
+      = f.hidden_field :lat
+      = f.hidden_field :lon
+      #poi-map
+      %script
+        var map = L.mapbox.map('poi-map', 'randyme.h29f04e6');
+        map.locate({setView: true, maxZoom: 19});
+        map.on('locationfound', function (e) {
+        var marker = L.marker(e.latlng, { draggable: true });
+        $('#poi_lat').val(e.latlng.lat);
+        $('#poi_lon').val(e.latlng.lng);
+        marker.on('dragend', function(e) {
+        $('#poi_lat').val(e.target._latlng.lat);
+        $('#poi_lon').val(e.target._latlng.lng);
+        });
+        marker.addTo(map);
+        });
+        map.on('locationerror', function (e) {
+        console.log(e);
+        });
+      %p Drag the pin above!
+      %button.btn.btn-primary.btn-lg.btn-block Submit

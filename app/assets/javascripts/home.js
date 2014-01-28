@@ -9,8 +9,8 @@ function checkIn() {
         if (geoJson.hasOwnProperty(key)) {
           obj = geoJson[key];
           $('#poi-results-list').append([
-            '<a href="/pois/' + obj.osm_id + '" class="list-group-item">',
-            obj.name + '<br/>' + obj.full_addr + '<br/>' + obj.distance + ' miles</a>'
+            '<a href="/pois/' + obj.id + '" class="list-group-item">' + obj.name,
+            '<br/>' + obj.full_addr + '<br/>' + obj.distance + ' miles</a>'
           ].join(''))
         }
       }

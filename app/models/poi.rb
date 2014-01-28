@@ -52,6 +52,15 @@ class Poi < ActiveRecord::Base
     raise response.class.name unless response.code=='200'
   end
 
+  def display_category
+    if categories.count <= 1
+      categories.first
+    else
+      # category with parent is more specific, preferred
+      categories.select { |c| !c.parent_id.nil? }.first
+    end
+  end
+
   private
 
   def to_xml(changeset, user)
