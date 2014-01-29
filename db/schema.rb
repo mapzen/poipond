@@ -15,6 +15,7 @@ ActiveRecord::Schema.define(version: 20140127004025) do
 
   create_table "categories", force: true do |t|
     t.string   "name"
+    t.string   "icon"
     t.integer  "parent_id"
     t.text     "tags"
     t.datetime "created_at"
@@ -46,6 +47,7 @@ ActiveRecord::Schema.define(version: 20140127004025) do
     t.datetime "updated_at"
   end
 
+  add_index "pois", ["lat", "lon"], name: "index_pois_on_lat_and_lon", using: :btree
   add_index "pois", ["osm_type", "osm_id"], name: "index_pois_on_osm_type_and_osm_id", unique: true, using: :btree
 
   create_table "users", force: true do |t|

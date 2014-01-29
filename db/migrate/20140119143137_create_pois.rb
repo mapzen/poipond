@@ -17,5 +17,6 @@ class CreatePois < ActiveRecord::Migration
       t.timestamps
     end
     add_index :pois, [:osm_type, :osm_id], :unique=>true
+    add_index :pois, [:lat, :lon]
   end
 end
