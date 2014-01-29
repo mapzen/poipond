@@ -7,7 +7,7 @@ development:
   host: localhost
   socket: /var/run/mysqld/mysqld.sock
 
-osm_development:
+development_osm:
   adapter: postgresql
   encoding: unicode
   database: osm-nyc

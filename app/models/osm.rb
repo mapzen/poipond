@@ -1,6 +1,6 @@
 class Osm < ActiveRecord::Base
 
-  establish_connection("osm_#{Rails.env}")
+  establish_connection("#{Rails.env}_osm")
 
   def self.poi_select_fields
     fields = %w(
