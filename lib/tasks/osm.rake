@@ -18,6 +18,7 @@ namespace :osm do
             p.lat = latlon['coordinates'][1]
             p.lon = latlon['coordinates'][0]
           end
+          next if poi.name.empty?
           poi.categories << category unless poi.categories.include? category
           poi.save
         end
