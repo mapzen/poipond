@@ -26,25 +26,13 @@
           %span.icon-bar
           %span.icon-bar
           %span.icon-bar
-        %a.navbar-brand{ :href=>'/', :style=>'padding-top:2px; padding-bottom:2px' }
+        %a.navbar-brand{ :href=>'/' }
           %img{ :src=>'/assets/logo.png', :width=>198, :height=>46 }
       %div.collapse.navbar-collapse#navcoll
-        %ul.nav.navbar-nav
-          %li.active
-            %a{ :href=>'#' } Link
-          %li
-            %a{ :href=>'#' }Link
         - if current_user
           %ul.nav.navbar-nav.navbar-right
             %li
               %a{ :href=> logout_url } Log out
     .container
       = yield
-    %nav.navbar.navbar-default.navbar-fixed-bottom{ :role=>'navigation' }
-      .text-center
-        - if !current_user && (params[:controller]!='users' && (params[:action]!='create' || params[:action]!='new'))
-          %a.btn.btn-primary.btn-lg.navbar-btn{ href: '/auth/osm', type: 'button' } Login with OSM
-        - elsif current_user && params[:controller]=='home'
-          %a.btn.btn-primary.btn-lg.navbar-btn#check-in{ :href=>'#', :'data-toggle'=>'modal', :'data-target'=>'#poi-results', :onclick=>'checkIn()' }
-            %span.glyphicon.glyphicon-map-marker
     = render :partial => 'home/poi_results'
