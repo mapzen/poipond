@@ -14,10 +14,9 @@ class PoisController < ApplicationController
   end
 
   def new
-    if params[:category_id]
-      @poi = Poi.new
-      @category = Category.find(params[:category_id])
-    else
+    @category = Category.find(params['poi'].delete('category_id'))
+    @poi = Poi.new(poi_params)
+    unless @category && @poi.lat && @poi.lon
       redirect_to choose_category_url
     end
   end
@@ -36,13 +35,17 @@ class PoisController < ApplicationController
       category = Category.find(params[:category_id])
       children = category.children
       if children.empty?
-        redirect_to new_poi_url(category_id: category.id)
+        redirect_to choose_location_url(category_id: category.id)
       else
         @categories = children
       end
     else
       @categories = Category.where(parent_id: nil).order(:name)
     end
+  end
+
+  def choose_location
+    @poi = Poi.new
   end
 
   private

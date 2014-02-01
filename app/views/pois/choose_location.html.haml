@@ -1,0 +1,25 @@
+%h1 Add a new Place
+%h2 Step 2 of 3: Set location
+%p Drag Poi to the exact location
+= form_for @poi, url: { action: "new" }, method: 'get', html: { role: 'form' } do |f|
+  = f.hidden_field :lat
+  = f.hidden_field :lon
+  = f.hidden_field :category_id, value: params[:category_id]
+  #poi-map
+  %script
+    var map = L.mapbox.map('poi-map', 'randyme.h29f04e6');
+    map.locate({setView: true, maxZoom: 19});
+    map.on('locationfound', function (e) {
+    var marker = L.marker(e.latlng, { draggable: true });
+    $('#poi_lat').val(e.latlng.lat);
+    $('#poi_lon').val(e.latlng.lng);
+    marker.on('dragend', function(e) {
+    $('#poi_lat').val(e.target._latlng.lat);
+    $('#poi_lon').val(e.target._latlng.lng);
+    });
+    marker.addTo(map);
+    });
+    map.on('locationerror', function (e) {
+    console.log(e);
+    });
+  %button.btn.btn-warning.btn-lg.pull-right Next
