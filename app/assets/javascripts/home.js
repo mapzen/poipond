@@ -11,7 +11,7 @@ function checkIn() {
           $('#poi-results-list').append([
             '<a href="/pois/' + obj.id + '" class="list-group-item">' + obj.name,
             '<br/>' + obj.full_addr + '<br/>' + obj.distance + ' miles',
-            '<img src="/assets/edit-icon.png" width="20" height="20" class="pull-right"></a>'
+            '<img src="/assets/edit-poi.png" width="20" height="20" class="pull-right"></a>'
           ].join(''))
         }
       }
