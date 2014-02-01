@@ -1,7 +1,12 @@
-- if !current_user
+- if current_user
+  %nav.navbar.navbar-default.navbar-fixed-bottom{ :role=>'navigation' }
+    .text-center
+      %a#check-in{ :href=>'#', :'data-toggle'=>'modal', :'data-target'=>'#poi-results', :onclick=>'checkIn()' }
+        %img{ :src=>'/assets/button.png', :width=>80, :height=>80 }
+  = render :partial => 'poi_results'
+- else
   .jumbotron
     %h1 Welcome to POI Pond!
     %h2 Hop in, the water's warm...
     %p POI Pond is a fun way to contribute points of interest like your favorite neighborhood restaurants, bars, and stores to OpenStreetMap.
     %a.btn.btn-warning.btn-lg.navbar-btn{ href: '/auth/osm', type: 'button' } Login with OSM
-= render :partial => 'poi_results'
