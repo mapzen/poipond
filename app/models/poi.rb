@@ -15,8 +15,9 @@ class Poi < ActiveRecord::Base
       (6378*acos(cos(radians(#{lat}))*cos(radians(lat))*
       cos(radians(lon)-radians(#{lon}))+sin(radians(#{lat}))*
       sin(radians(lat)))) AS distance").
-    where("lat BETWEEN lat+(#{distance}/111.045) AND lat-(#{distance}/111.045) AND lon BETWEEN lon+(#{lon}/111.045 * COS(RADIANS(lon))) AND lon-(#{lon}/111.045 * COS(RADIANS(lon)))").
-    having("distance<#{distance}").
+    where("lat BETWEEN #{lat-(distance/111.045)} AND #{lat+(distance/111.045)} AND
+           lon BETWEEN #{lon}-(#{distance}/(111.045 * COS(RADIANS(#{lat})))) AND
+                       #{lon}+(#{distance}/(111.045 * COS(RADIANS(#{lat}))))").
     order('distance').
     limit(count)
   }
