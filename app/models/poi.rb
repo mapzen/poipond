@@ -12,11 +12,10 @@ class Poi < ActiveRecord::Base
 
   scope :closest, lambda { |lat, lon, count=10, distance=1|
     select("*,
-      (3959*acos(cos(radians(#{lat}))*cos(radians(lat))*
+      (6378*acos(cos(radians(#{lat}))*cos(radians(lat))*
       cos(radians(lon)-radians(#{lon}))+sin(radians(#{lat}))*
       sin(radians(lat)))) AS distance").
-    where("lat BETWEEN CAST((#{lat.to_f+0.1}) AS DECIMAL (15,10)) AND CAST((#{lat.to_f-0.1}) AS DECIMAL (15,10))
-           AND lon BETWEEN CAST((#{lon.to_f+0.1}) AS DECIMAL(15,10)) AND CAST((#{lon.to_f-0.1}) AS DECIMAL(15,10))").
+    where("lat BETWEEN lat+(#{distance}/111.045) AND lat-(#{distance}/111.045) AND lon BETWEEN lon+(#{lon}/111.045 * COS(RADIANS(lon))) AND lon-(#{lon}/111.045 * COS(RADIANS(lon)))").
     having("distance<#{distance}").
     order('distance').
     limit(count)
