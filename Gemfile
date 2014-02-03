@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails'
+gem 'ar-octopus'
 gem 'pg'
 gem 'mysql2'
 gem 'sass-rails'
