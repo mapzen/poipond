@@ -99,6 +99,8 @@ class Poi < ActiveRecord::Base
     self.tags[:phone] = phone unless phone.nil?
     self.tags[:website] = website unless website.nil?
     categories.map(&:tags).each { |th| self.tags = tags.merge(th) }
+    parents = categories.map(&:parent)
+    parents.map(&:tags).each { |th| self.tags = tags.merge(th) }
     self.tags = self.tags.delete_if { |k,v| v.blank? }
     xml = ''
     self.tags.each do |k,v|
