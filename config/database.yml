@@ -5,7 +5,6 @@ development:
   pool: 5
   username: root
   host: localhost
-  socket: /var/run/mysqld/mysqld.sock
 
 development_osm:
   adapter: postgresql
