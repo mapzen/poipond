@@ -5,9 +5,8 @@
         %button.close{ :type=>'button', :'data-dismiss'=>'modal', :'aria-hidden'=>'true' } &times;
         %h4.modal-title#poi-results-label
           Nearby Places
-      %div.modal-body
-        .text-center{ :style=>'background-color:#999;color:#FFF;padding-top:5px;padding-bottom:5px;' }
-          Don't see a place on the list?
-          %a.btn.btn-warning.btn-sm{ :href=>'/pois/new/choose_category' } + Add a new place
+      %div.modal-body 
+        Don't see a place on the list?
+        %a.btn.btn-warning{ :href=>'/pois/new/choose_category' }+ Add a New place
         %ul.list-group#poi-results-list
-      %div.modal-footer POIs &copy; OpenStreetMap contributors (that's you)
+      %div.modal-footer POI's &copy; OpenStreetMap contributors (that's you!)

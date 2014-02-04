@@ -1,7 +1,10 @@
-%h1 Add a new Place
-%h2 Step 1: Pick a category
+%div.add-places
+  %h1 Add a new Place
+%div.pick-category
+  %span.label.label-info.pull-left Step 1 
+  %h2 Pick a category
 .list-group
   - @categories.each do |category|
     %a.list-group-item{ href: "/pois/new/choose_category/#{category.id}" }
       %span= category.name
-      %span.pull-right &gt;
+      %span.pull-right.glyphicon.glyphicon-chevron-right.grey

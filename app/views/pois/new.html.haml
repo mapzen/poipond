@@ -1,3 +1,8 @@
+%div.add-places
+  %h1 Add a new Place
+%div.pick-category
+  %span.label.label-info.pull-left Step 3 
+  %h2 Place Info
 %ol.breadcrumb
   - if @category.parent
     %li= @category.parent.name
@@ -6,7 +11,7 @@
   .form-group
     %label{ for: 'name' } Name
     = f.text_field :name, class: 'form-control input-lg', id: 'name'
-  .form-group
+  .form.group.col-xs-4.form-inline.form-group
     %label{ for: 'addr_housenumber' } Housenumber
     = f.text_field :addr_housenumber, class: 'form-control input-lg', id: 'addr_housenumber'
     %label{ for: 'addr_street' } Street
@@ -19,4 +24,4 @@
     = f.text_field :website, class: 'form-control input-lg', id: 'website'
   = f.hidden_field :lat
   = f.hidden_field :lon
-  %button.btn.btn-primary.btn-lg.btn-block Submit
+  %button.btn.btn-warning.btn-lg.btn-block Create POI
