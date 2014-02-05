@@ -64,6 +64,11 @@ h6 {
   background-color: #FF530B;
 }
 
+.jumbotron .btn-warning:active {
+  border-color: #ACACAC;
+  background-color: #d33e00;
+}
+
 .btn-warning {
   border-color: #ACACAC;
   background-color: #FF530B;
@@ -72,6 +77,11 @@ h6 {
 .btn-warning:hover {
   border-color: #ACACAC;
   background-color: #FF530B;
+}
+
+.btn-warning:active {
+  border-color: #ACACAC;
+  background-color: #d33e00;
 }
 
 .btn-lg.pull-right {
