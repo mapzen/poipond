@@ -2,7 +2,7 @@
   %nav.navbar.navbar-default.navbar-fixed-bottom{ :role=>'navigation' }
     .text-center
       %a#check-in{ :href=>'#', :'data-toggle'=>'modal', :'data-target'=>'#poi-results', :onclick=>'checkIn()' }
-        %img{ :src=>'/assets/button.png' }
+        = image_tag('button.png')
   = render :partial => 'poi_results'
 - else
   .jumbotron
