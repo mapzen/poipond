@@ -3,7 +3,7 @@
 %div.pick-category
   %span.label.label-info.pull-left Step 2 
   %h2 Set location
-%p Drag the marker to the exact location
+%p Drag the pin to update location on the map
 = form_for @poi, url: { action: "new" }, method: 'get', html: { role: 'form' } do |f|
   = f.hidden_field :lat
   = f.hidden_field :lon

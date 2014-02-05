@@ -10,18 +10,21 @@
 = form_for @poi, url: { action: "create", category_id: params[:category_id] }, html: { role: 'form' } do |f|
   .form-group
     %label{ for: 'name' } Name
-    = f.text_field :name, class: 'form-control input-lg', id: 'name', placeholder: 'Common name'
-  .form-group.col-xs-6.form-inline.form-group
+    = f.text_field :name, class: 'form-control input-lg', id: 'name'
+  .form-group
     %label{ for: 'addr_housenumber' } House Number
-    = f.text_field :addr_housenumber, class: 'form-control input-lg', id: 'addr_housenumber', placeholder: '123'
-    %label{ for: 'addr_housenumber' } Street
-    = f.text_field :addr_street, class: 'form-control input-lg', id: 'addr_street', placeholder: ' ABC Street'
+    .help-block.pull-right e.g., '123' or '10 West'
+    = f.text_field :addr_housenumber, class: 'form-control input-lg', id: 'addr_housenumber'
+  .form-group
+    %label{ for: 'addr_housenumber' } Cross Street
+    .help-block.pull-right e.g., 'At 5th Ave.' or '11th Street'
+    = f.text_field :addr_street, class: 'form-control input-lg', id: 'addr_street'
   .form-group
     %label{ for: 'phone' } Phone
-    = f.text_field :phone, class: 'form-control input-lg', id: 'phone', placeholder: '+00 000 000 0000'
+    = f.text_field :phone, class: 'form-control input-lg', id: 'phone'
   .form-group
     %label{ for: 'website' } Website
-    = f.text_field :website, class: 'form-control input-lg', id: 'website', placeholder: 'http://example.com'
+    = f.text_field :website, class: 'form-control input-lg', id: 'website'
   = f.hidden_field :lat
   = f.hidden_field :lon
   %button.btn.btn-warning.btn-lg.btn-block Create POI

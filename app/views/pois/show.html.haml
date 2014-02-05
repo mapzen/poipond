@@ -1,9 +1,9 @@
+%div.add-places
+  %h1 Edit a Place
 %ol.breadcrumb
   - if @poi.display_category.parent
-    %li
-      %a{ :href=>'#' }= @poi.display_category.parent.name
-  %li
-    %a{ :href=>'#' }= @poi.display_category.name
+    %li= @poi.display_category.parent.name
+  %li= @poi.display_category.name
 = form_for @poi, url: { action: "update" }, html: { role: 'form' } do |f|
   .container
     .col-md-8

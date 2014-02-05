@@ -3,9 +3,11 @@
   = f.text_field :name, class: 'form-control input-lg', id: 'name'
 .form-group
   %label{ for: 'addr_housenumber' } Housenumber
+  .help-block.pull-right e.g., '123' or '10 West'
   = f.text_field :addr_housenumber, class: 'form-control input-lg', id: 'addr_housenumber'
 .form-group
-  %label{ for: 'addr_street' } Street
+  %label{ for: 'addr_street' } Cross Street
+  .help-block.pull-right e.g., 'At 5th Ave.' or '11th Street'
   = f.text_field :addr_street, class: 'form-control input-lg', id: 'addr_street'
 .form-group
   %label{ for: 'addr_city' } City
