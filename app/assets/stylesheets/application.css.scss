@@ -134,20 +134,26 @@ h6 {
   padding: 10px 20px 10px 20px;
 }
 
-.list-group-item {
+.poi-categories .list-group-item {
   height: 50px;
   font-weight: 500;
 }
 
 .list-group-item img {
-  width:30px;
-  height:30px;
+  width: 32px;
+  height: 32px;
   padding: 5px;
+  margin-right: 5px;
+  margin-top: -2px;
   border-radius: 20px;
   background-color: #c4c4c4;
 }
 
-.list-group a:hover {
+.list-group-item img:hover {
+  background-color: #ff530b;
+}
+
+.poi-categories .list-group a:hover {
   color:#ff530b;
 }
 
@@ -169,6 +175,10 @@ h6 {
   color: #c4c4c4;
 }
 
+.grey:hover {
+  color: #ff530b;
+}
+
 /* Floating address field on a single line */
 .col-xs-6 {
   float: none;
@@ -180,10 +190,10 @@ h6 {
 .breadcrumb {
   margin-top: 0px;
   background-color: #c4c4c4; 
-  color: #fff;
+  color: #ff530b;
 }
 
 .breadcrumb > li + li:before {
   content: "| ";
-  color:#fff;
+  color:#ff530b;
 }

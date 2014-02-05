@@ -3,9 +3,9 @@
 %div.pick-category
   %span.label.label-info.pull-left Step 1 
   %h2 Pick a category
-.list-group
+.list-group.poi-categories
   - @categories.each do |category|
     %a.list-group-item{ href: "/pois/new/choose_category/#{category.id}" }
-      %img{ :src=>'/assets/icons/#{category.icon}.png' }
+      %img{ :src=>"/assets/icons/#{category.icon}.png" }
       %span= category.name
       %span.pull-right.glyphicon.glyphicon-chevron-right.grey
