@@ -2,7 +2,7 @@
   %h1 Add a new Place
 %div.pick-category
   %span.label.label-info.pull-left Step 3 
-  %h2 Place Info
+  %h2 Add Info
 %ol.breadcrumb
   - if @category.parent
     %li= @category.parent.name
@@ -10,18 +10,18 @@
 = form_for @poi, url: { action: "create", category_id: params[:category_id] }, html: { role: 'form' } do |f|
   .form-group
     %label{ for: 'name' } Name
-    = f.text_field :name, class: 'form-control input-lg', id: 'name'
-  .form.group.col-xs-4.form-inline.form-group
-    %label{ for: 'addr_housenumber' } Housenumber
-    = f.text_field :addr_housenumber, class: 'form-control input-lg', id: 'addr_housenumber'
-    %label{ for: 'addr_street' } Street
-    = f.text_field :addr_street, class: 'form-control input-lg', id: 'addr_street'
+    = f.text_field :name, class: 'form-control input-lg', id: 'name', placeholder: 'Common name'
+  .form-group.col-xs-6.form-inline.form-group
+    %label{ for: 'addr_housenumber' } House Number
+    = f.text_field :addr_housenumber, class: 'form-control input-lg', id: 'addr_housenumber', placeholder: '123'
+    %label{ for: 'addr_housenumber' } Street
+    = f.text_field :addr_street, class: 'form-control input-lg', id: 'addr_street', placeholder: ' ABC Street'
   .form-group
     %label{ for: 'phone' } Phone
-    = f.text_field :phone, class: 'form-control input-lg', id: 'phone'
+    = f.text_field :phone, class: 'form-control input-lg', id: 'phone', placeholder: '+00 000 000 0000'
   .form-group
     %label{ for: 'website' } Website
-    = f.text_field :website, class: 'form-control input-lg', id: 'website'
+    = f.text_field :website, class: 'form-control input-lg', id: 'website', placeholder: 'http://example.com'
   = f.hidden_field :lat
   = f.hidden_field :lon
   %button.btn.btn-warning.btn-lg.btn-block Create POI

@@ -3,10 +3,10 @@
     %div.modal-content
       %div.modal-header
         %button.close{ :type=>'button', :'data-dismiss'=>'modal', :'aria-hidden'=>'true' } &times;
-        %h4.modal-title#poi-results-label
+        %h1.modal-title#poi-results-label
           Nearby Places
       %div.modal-body 
-        Don't see a place on the list?
+        Missing something?
         %a.btn.btn-warning{ :href=>'/pois/new/choose_category' }+ Add a New place
-        %ul.list-group#poi-results-list
-      %div.modal-footer POI's &copy; OpenStreetMap contributors (that's you!)
+      %ul.list-group#poi-results-list
+      %div.modal-footer &copy; OpenStreetMap contributors (that's you!)

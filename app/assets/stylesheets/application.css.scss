@@ -27,6 +27,13 @@ h1 {
   margin: 0px;
 }
 
+.modal-header h1 {
+  font-size: 18px;
+  color: #000;
+  font-weight: 500;
+  margin: 0px;
+}
+
 h2 {
   margin-top: 0px;
 }
@@ -122,14 +129,22 @@ h6 {
 }
 
 .modal-content .modal-body {
-  background-color:#999;
+  background-color:#c4c4c4;
   color:#FFF;
-  padding: 12px 20px .5px 20px;
+  padding: 10px 20px 10px 20px;
 }
 
 .list-group-item {
-  height: 48px;
+  height: 50px;
   font-weight: 500;
+}
+
+.list-group-item img {
+  width:30px;
+  height:30px;
+  padding: 5px;
+  border-radius: 20px;
+  background-color: #c4c4c4;
 }
 
 .list-group a:hover {
@@ -148,13 +163,27 @@ h6 {
   font-size: 14px;
 }
 
+/* Right carat icon for category list */
 .grey {
-  color: #9a9a9a;
+  padding-top: 5px;
+  color: #c4c4c4;
 }
 
-.col-xs-4 {
+/* Floating address field on a single line */
+.col-xs-6 {
   float: none;
   padding: 0px;
   margin-left: 0;
   margin-right: 0;
+}
+
+.breadcrumb {
+  margin-top: 0px;
+  background-color: #c4c4c4; 
+  color: #fff;
+}
+
+.breadcrumb > li + li:before {
+  content: "| ";
+  color:#fff;
 }
