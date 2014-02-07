@@ -167,7 +167,6 @@ h6 {
 
 #poi-results-list img  {
   padding: 4px;
-  margin-right: 5px;
   margin-top: -26px;
   border-radius: 15px;
   background-color: #c4c4c4;
@@ -180,7 +179,11 @@ h6 {
 }
 
 #poi-results-list a {
-  min-height: 60px;
+  height: 75px;
+}
+
+#poi-results-list a:hover {
+  height: 75px;
 }
 
 .pick-category {
