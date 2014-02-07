@@ -172,18 +172,13 @@ h6 {
   background-color: #c4c4c4;
 }
 
-#poi-results-list a:hover {
-  height: 60px;
+.list-group #poi-results-list li {
+  height: 75px;
+}
+
+.list-group #poi-results-list li:hover {
+  height: 75px;
   color:#ff530b;
-  border-radius: 0px;
-}
-
-#poi-results-list a {
-  height: 75px;
-}
-
-#poi-results-list a:hover {
-  height: 75px;
 }
 
 .pick-category {
