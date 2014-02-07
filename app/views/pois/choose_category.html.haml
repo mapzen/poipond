@@ -5,7 +5,12 @@
   %h2 Pick a category
 .list-group.poi-categories
   - @categories.each do |category|
+<<<<<<< HEAD
     %a.list-group-item.list-image{ href: "/pois/new/choose_category/#{category.id}" }
       %img{ :src=>"/assets/icons/#{category.icon}.png" }
+=======
+    %a.list-group-item{ href: "/pois/new/choose_category/#{category.id}" }
+      = image_tag("#{category.icon}.png")
+>>>>>>> 3688b52dfba6f42deaa220aaaf24f73d44d3caad
       %span= category.name
       %span.pull-right.glyphicon.glyphicon-chevron-right.grey
