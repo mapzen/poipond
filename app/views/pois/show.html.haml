@@ -1,11 +1,11 @@
 %div.add-places
   %h1.modal-title Edit a Place
-%ol.breadcrumb
+= form_for @poi, url: { action: "update" }, html: { role: 'form' } do |f|
+  .container
+  %ol.breadcrumb
   - if @poi.display_category.parent
     %li= @poi.display_category.parent.name
   %li= @poi.display_category.name
-= form_for @poi, url: { action: "update" }, html: { role: 'form' } do |f|
-  .container
     .col-md-8
       .form-group
         %label{ for: 'name' } Name
