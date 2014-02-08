@@ -1,4 +1,4 @@
-class OsmDownload
+class OsmUpload
 
   include Sidekiq::Worker
 
