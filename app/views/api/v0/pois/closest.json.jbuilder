@@ -12,5 +12,5 @@ json.array! @pois do |poi|
   json.lat poi.lat.to_f.round(6)
   json.lon poi.lon.to_f.round(6)
   json.distance poi.distance.round(2)
-  json.category_id poi.display_category.id
+  json.category_icon poi.display_category.icon
 end
