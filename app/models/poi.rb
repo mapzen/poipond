@@ -20,21 +20,6 @@ class Poi < ActiveRecord::Base
     limit(count)
   }
 
-  def sync_to_osm(user)
-    changeset = Changeset.new(:user=>user)
-    changeset.create
-    # edit existing if persisted, otherwise create new
-    url = osm_id.nil? ? "#{OSM_API_BASE}/#{osm_type}/create" : "#{OSM_API_BASE}/#{osm_type}/#{osm_id}"
-    xml = to_xml(changeset, user)
-    response = user.osm_access_token.put(url, xml, {'Content-Type'=>'application/xml'})
-    changeset.close
-    if response.code=='200'
-      self.update_attributes(:osm_id=>response.body)
-    else
-      raise response.class.name
-    end
-  end
-
   def display_category
     if categories.count <= 1
       categories.first
@@ -43,17 +28,6 @@ class Poi < ActiveRecord::Base
       categories.select { |c| !c.parent_id.nil? }.first
     end
   end
-
-  def self.decode_tags(tags)
-    hash = {}
-    tags.each do |tag|
-      key = tag['k'].gsub(':', '_')
-      hash[key] = tag['v']
-    end
-    hash.symbolize_keys
-  end
-
-  private
 
   def to_xml(changeset, user)
     xml = "<osm>"
@@ -88,6 +62,15 @@ class Poi < ActiveRecord::Base
       xml << "<tag k=\"#{key}\" v=\"#{val}\"/>"
     end
     xml
+  end
+
+  def self.decode_tags(tags)
+    hash = {}
+    tags.each do |tag|
+      key = tag['k'].gsub(':', '_')
+      hash[key] = tag['v']
+    end
+    hash.symbolize_keys
   end
 
 end
