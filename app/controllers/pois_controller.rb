@@ -8,7 +8,7 @@ class PoisController < ApplicationController
   def update
     @poi = Poi.find(params[:id])
     @poi.update_attributes(poi_params)
-    @poi.sync_to_osm(current_user)
+    OsmUpload.perform_async(current_user.id, @poi.id)
     redirect_to home_url
   end
 
@@ -25,7 +25,7 @@ class PoisController < ApplicationController
     @poi.osm_type = 'node'
     @poi.save
     @poi.categories << Category.find(params[:category_id]) if params[:category_id]
-    @poi.sync_to_osm(current_user)
+    OsmUpload.perform_async(current_user.id, @poi.id)
     redirect_to home_url
   end
 
