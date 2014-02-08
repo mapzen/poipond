@@ -1,1 +1,4 @@
 api-key: 75f2af5d8a02b1b85cfbaea2291cf8726939a7b0
+
+test:
+  enabled: true
