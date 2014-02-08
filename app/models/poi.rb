@@ -20,6 +20,34 @@ class Poi < ActiveRecord::Base
     limit(count)
   }
 
+  def create_osm_poi(user)
+    changeset = Changeset.new(:user=>user)
+    changeset.create
+    url = "#{OSM_API_BASE}/#{osm_type}/create"
+    xml = to_xml(changeset)
+    response = user.osm_access_token.put(url, xml, { 'Content-Type' => 'application/xml' })
+    changeset.close
+    if response.code=='200'
+      self.update_attributes(:osm_id => response.body)
+    else
+      raise response.class.name
+    end
+  end
+
+  def update_osm_poi(user)
+    changeset = Changeset.new(:user=>user)
+    changeset.create
+    url = "#{OSM_API_BASE}/#{osm_type}/#{osm_id}"
+    xml = to_xml(changeset)
+    response = user.osm_access_token.put(url, xml, { 'Content-Type' => 'application/xml' })
+    changeset.close
+    if response.code=='200'
+      self.update_attributes(:version => response.body)
+    else
+      raise response.class.name
+    end
+  end
+
   def display_category
     if categories.count <= 1
       categories.first
@@ -29,13 +57,24 @@ class Poi < ActiveRecord::Base
     end
   end
 
-  def to_xml(changeset, user)
+  def self.decode_tags(tags)
+    hash = {}
+    tags.each do |tag|
+      key = tag['k'].gsub(':', '_')
+      hash[key] = tag['v']
+    end
+    hash.symbolize_keys
+  end
+
+  private
+
+  def to_xml(changeset)
     xml = "<osm>"
     xml << "<#{osm_type} visible=\"true\" "
     xml << "id=\"#{osm_id}\" " unless osm_id.nil?
     xml << "version=\"#{version}\" " unless version.nil?
     xml << "changeset=\"#{changeset.id}\" timestamp=\"#{Time.now.utc}\" "
-    xml << "user=\"#{user.display_name}\" uid=\"#{user.uid}\" "
+    xml << "user=\"#{changeset.user.display_name}\" uid=\"#{changeset.user.uid}\" "
     xml << "lat=\"#{lat}\" lon=\"#{lon}\">"
     xml << encode_tags
     xml << "</#{osm_type}>"
@@ -51,9 +90,9 @@ class Poi < ActiveRecord::Base
     self.tags[:addr_postcode] = addr_postcode unless addr_postcode.nil?
     self.tags[:phone] = phone unless phone.nil?
     self.tags[:website] = website unless website.nil?
-    categories.map(&:tags).each { |th| self.tags = tags.merge(th) }
+    categories.map(&:tags).each { |th| self.tags = tags.merge(th.symbolize_keys) }
     parents = categories.map(&:parent).compact
-    parents.map(&:tags).each { |th| self.tags = tags.merge(th) }
+    parents.map(&:tags).each { |th| self.tags = tags.merge(th.symbolize_keys) }
     self.tags = self.tags.delete_if { |k,v| v.blank? }
     xml = ''
     self.tags.each do |k,v|
@@ -62,15 +101,6 @@ class Poi < ActiveRecord::Base
       xml << "<tag k=\"#{key}\" v=\"#{val}\"/>"
     end
     xml
-  end
-
-  def self.decode_tags(tags)
-    hash = {}
-    tags.each do |tag|
-      key = tag['k'].gsub(':', '_')
-      hash[key] = tag['v']
-    end
-    hash.symbolize_keys
   end
 
 end
