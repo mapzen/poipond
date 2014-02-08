@@ -1,5 +1,3 @@
-require 'xmlsimple'
-
 class Poi < ActiveRecord::Base
 
   serialize :tags, Hash
@@ -21,25 +19,6 @@ class Poi < ActiveRecord::Base
     order('distance').
     limit(count)
   }
-
-  def sync_from_osm(user)
-    raise 'Missing osm_type' if osm_type.nil?
-    raise 'Missing osm_id' if osm_id.nil?
-    response = user.osm_access_token.get("#{OSM_API_BASE}/#{osm_type}/#{osm_id}")
-    hash = XmlSimple.xml_in(response.body)[osm_type].first.symbolize_keys
-    self.lat = hash[:lat]
-    self.lon = hash[:lon]
-    self.version = hash[:version]
-    self.tags = decode_tags(hash[:tag])
-    self.name = tags[:name]
-    self.addr_housenumber = tags[:addr_housenumber]
-    self.addr_street = tags[:addr_street]
-    self.addr_city = tags[:addr_city]
-    self.addr_postcode = tags[:addr_postcode]
-    self.phone = tags[:phone]
-    self.website = tags[:website]
-    self.save
-  end
 
   def sync_to_osm(user)
     changeset = Changeset.new(:user=>user)
@@ -65,6 +44,15 @@ class Poi < ActiveRecord::Base
     end
   end
 
+  def self.decode_tags(tags)
+    hash = {}
+    tags.each do |tag|
+      key = tag['k'].gsub(':', '_')
+      hash[key] = tag['v']
+    end
+    hash.symbolize_keys
+  end
+
   private
 
   def to_xml(changeset, user)
@@ -79,15 +67,6 @@ class Poi < ActiveRecord::Base
     xml << "</#{osm_type}>"
     xml << "</osm>"
     xml
-  end
-
-  def decode_tags(tags)
-    hash = {}
-    tags.each do |tag|
-      key = tag['k'].gsub(':', '_')
-      hash[key] = tag['v']
-    end
-    hash.symbolize_keys
   end
 
   def encode_tags

@@ -14,4 +14,7 @@ Poipond::Application.routes.draw do
 
   get '/api/v0/pois/closest' => 'api/v0/pois#closest', :defaults => { :format => "json" }
 
+  require 'sidekiq/web'
+  mount Sidekiq::Web => '/sidekiq'
+
 end

@@ -2,7 +2,6 @@ class PoisController < ApplicationController
 
   def show
     @poi = Poi.find(params[:id])
-    @poi.sync_from_osm(current_user)
     @poi.reload
   end
 
