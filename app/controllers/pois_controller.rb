@@ -2,7 +2,6 @@ class PoisController < ApplicationController
 
   def show
     @poi = Poi.find(params[:id])
-    @poi.reload
   end
 
   def update

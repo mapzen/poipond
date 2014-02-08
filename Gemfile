@@ -18,6 +18,7 @@ gem 'oauth'
 gem 'xml-simple'
 gem 'sidekiq'
 gem 'sinatra'
+gem 'exceptional'
 
 group :doc do
   gem 'sdoc', require: false
