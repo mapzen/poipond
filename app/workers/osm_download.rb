@@ -19,6 +19,8 @@ class OsmDownload
       :name => tags[:name],
       :addr_housenumber => tags[:addr_housenumber],
       :addr_street => tags[:addr_street],
+      :addr_city => tags[:addr_city],
+      :addr_postcode => tags[:addr_postcode],
       :phone => tags[:phone],
       :website => tags[:website]
     )
