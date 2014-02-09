@@ -7,7 +7,7 @@ namespace :osm do
       %w(point line polygon).each do |shape|
         osm_type = shape=='point' ? 'node' : 'way'
         pois = Osm.pois(shape, where)
-        puts pois.count
+        puts "#{osm_type}: #{pois.count}"
         pois.each do |osm_poi|
           latlon = JSON.parse(osm_poi['st_asgeojson'])
           poi = Poi.where(osm_id: osm_poi['osm_id'], osm_type: osm_type).first_or_create do |p|
