@@ -27,6 +27,7 @@ class OsmUpload
           :phone => updated_attributes['phone'],
           :website => updated_attributes['website']
         )
+        poi.reload
         # and try again...
         poi.update_osm_poi(user)
       end
