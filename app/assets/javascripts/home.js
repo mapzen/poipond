@@ -12,7 +12,7 @@ function checkIn() {
           obj = geoJson[key];
           $('#poi-results-list').append([
             '<a href="/pois/' + obj.id + '" class="list-group-item"><span>' + obj.name,
-            '<br/>' + obj.full_addr + '<br/>' + obj.distance + ' miles</span>',
+            '<br/>' + obj.full_addr + '<br/>' + obj.distance + ' km</span>',
             '<span class="pull-right"><img src="/images/edit_poi.png" width="25" height="25" class="pull-right"></span></a>'
           ].join(''))
         }
