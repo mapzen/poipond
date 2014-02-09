@@ -21,12 +21,11 @@ class Poi < ActiveRecord::Base
   }
 
   def create_osm_poi(user)
-    changeset = Changeset.new(:user=>user)
-    changeset.create
+    changeset = Changeset.create(:user=>user, :poi=>self)
     url = "#{OSM_API_BASE}/#{osm_type}/create"
     xml = to_xml(changeset)
     response = user.osm_access_token.put(url, xml, { 'Content-Type' => 'application/xml' })
-    changeset.close
+    changeset.close_remote
     if response.code=='200'
       self.update_attributes(:osm_id => response.body)
     else
@@ -35,12 +34,11 @@ class Poi < ActiveRecord::Base
   end
 
   def update_osm_poi(user)
-    changeset = Changeset.new(:user=>user)
-    changeset.create
+    changeset = Changeset.create(:user=>user, :poi=>self)
     url = "#{OSM_API_BASE}/#{osm_type}/#{osm_id}"
     xml = to_xml(changeset)
     response = user.osm_access_token.put(url, xml, { 'Content-Type' => 'application/xml' })
-    changeset.close
+    changeset.close_remote
     if response.code=='200'
       self.update_attributes(:version => response.body)
     else
@@ -73,7 +71,7 @@ class Poi < ActiveRecord::Base
     xml << "<#{osm_type} visible=\"true\" "
     xml << "id=\"#{osm_id}\" " unless osm_id.nil?
     xml << "version=\"#{version}\" " unless version.nil?
-    xml << "changeset=\"#{changeset.id}\" timestamp=\"#{Time.now.utc}\" "
+    xml << "changeset=\"#{changeset.osm_id}\" timestamp=\"#{Time.now.utc}\" "
     xml << "user=\"#{changeset.user.display_name}\" uid=\"#{changeset.user.uid}\" "
     xml << "lat=\"#{lat}\" lon=\"#{lon}\">"
     xml << encode_tags

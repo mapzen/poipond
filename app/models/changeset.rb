@@ -1,14 +1,29 @@
 class Changeset
 
-  attr_accessor :user
-  attr_accessor :id
+  belongs_to :user
+  belongs_to :poi
 
-  def initialize(params={})
-    self.user = params[:user]
-    raise 'Missing user' if user.nil?
+  validates :user_id, :poi_id, :osm_id, :presence=>true
+
+  before_validation :open_remote
+
+  serialize :changes, Hash
+
+  def close_remote
+    response = user.osm_access_token.put("#{OSM_API_BASE}/changeset/#{id}/close")
+    self.update_attributes(:is_open=>false)
   end
 
-  def changeset_xml
+  private
+
+  def open_remote
+    response = user.osm_access_token.put("#{OSM_API_BASE}/changeset/create", create_changeset_xml,
+      {'Content-Type'=>'application/xml'})
+    self.osm_id = response.body
+    self.is_open = true
+  end
+
+  def create_changeset_xml
     xml = '<osm>'
     xml << '<changeset>'
     xml << '<tag k="created_by" v="POI Pond App"/>'
@@ -16,16 +31,6 @@ class Changeset
     xml << '</changeset>'
     xml << '</osm>'
     xml
-  end
-
-  def create
-    response = user.osm_access_token.put("#{OSM_API_BASE}/changeset/create", changeset_xml,
-      {'Content-Type'=>'application/xml'})
-    self.id = response.body
-  end
-
-  def close
-    response = user.osm_access_token.put("#{OSM_API_BASE}/changeset/#{id}/close")
   end
 
 end
