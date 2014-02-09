@@ -20,8 +20,8 @@ class Poi < ActiveRecord::Base
     limit(count)
   }
 
-  def create_osm_poi(user)
-    changeset = Changeset.create(:user=>user, :poi=>self)
+  def create_osm_poi(user, changes)
+    changeset = Changeset.create(:user=>user, :poi=>self, :changes=>changes)
     url = "#{OSM_API_BASE}/#{osm_type}/create"
     xml = to_xml(changeset)
     response = user.osm_access_token.put(url, xml, { 'Content-Type' => 'application/xml' })
@@ -33,8 +33,8 @@ class Poi < ActiveRecord::Base
     end
   end
 
-  def update_osm_poi(user)
-    changeset = Changeset.create(:user=>user, :poi=>self)
+  def update_osm_poi(user, changes)
+    changeset = Changeset.create(:user=>user, :poi=>self, :changes=>changes)
     url = "#{OSM_API_BASE}/#{osm_type}/#{osm_id}"
     xml = to_xml(changeset)
     response = user.osm_access_token.put(url, xml, { 'Content-Type' => 'application/xml' })

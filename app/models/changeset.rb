@@ -5,7 +5,7 @@ class Changeset
 
   validates :user_id, :poi_id, :osm_id, :presence=>true
 
-  before_validation :open_remote
+  before_validation :open_remote, :on => :create
 
   serialize :changes, Hash
 
