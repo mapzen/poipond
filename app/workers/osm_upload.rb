@@ -2,18 +2,18 @@ class OsmUpload
 
   include Sidekiq::Worker
 
-  def perform(user_id, poi_id, changes)
+  def perform(user_id, poi_id, poi_changes)
     user = User.find(user_id)
     poi = Poi.find(poi_id)
     if poi.osm_id.nil?
       # create a new record if no osm_id
-      poi.create_osm_poi(user, changes)
+      poi.create_osm_poi(user, poi_changes)
     else
       # otherwise update the existing record
       updated_attributes = poi.attributes
       begin
         # try to update
-        poi.update_osm_poi(user, changes)
+        poi.update_osm_poi(user, poi_changes)
       rescue
         # failed? download again from osm api, maybe a version conflict
         OsmDownload.new.perform(user.id, poi.id)
@@ -29,7 +29,7 @@ class OsmUpload
         )
         poi.reload
         # and try again...
-        poi.update_osm_poi(user, changes)
+        poi.update_osm_poi(user, poi_changes)
       end
     end
   end

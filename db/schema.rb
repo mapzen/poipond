@@ -23,11 +23,14 @@ ActiveRecord::Schema.define(version: 20140127004025) do
   end
 
   create_table "changesets", force: true do |t|
-    t.integer "user_id"
-    t.integer "poi_id"
-    t.string  "osm_id"
-    t.text    "changes"
-    t.boolean "is_open"
+    t.integer  "user_id"
+    t.integer  "poi_id"
+    t.string   "osm_id"
+    t.text     "poi_changes"
+    t.boolean  "is_open"
+    t.boolean  "created"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "changesets", ["osm_id"], name: "index_changesets_on_osm_id", using: :btree

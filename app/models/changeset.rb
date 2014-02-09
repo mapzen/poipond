@@ -1,4 +1,4 @@
-class Changeset
+class Changeset < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :poi
@@ -7,7 +7,7 @@ class Changeset
 
   before_validation :open_remote, :on => :create
 
-  serialize :changes, Hash
+  serialize :poi_changes, Hash
 
   def close_remote
     response = user.osm_access_token.put("#{OSM_API_BASE}/changeset/#{id}/close")
