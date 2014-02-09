@@ -16,9 +16,15 @@
     .help-block.pull-right e.g., '123' or '10 West'
     = f.text_field :addr_housenumber, class: 'form-control input-lg', id: 'addr_housenumber'
   .form-group
-    %label{ for: 'addr_housenumber' } Cross Street
-    .help-block.pull-right e.g., 'At 5th Ave.' or '11th Street'
+    %label{ for: 'addr_housenumber' } Street Name
+    .help-block.pull-right e.g., 'Main Street' or '5th Avenue'
     = f.text_field :addr_street, class: 'form-control input-lg', id: 'addr_street'
+  .form-group
+    %label{ for: 'addr_city' } City
+    = f.text_field :addr_city, class: 'form-control input-lg', id: 'addr_city'
+  .form-group
+    %label{ for: 'addr_postcode' } Postcode
+    = f.text_field :addr_postcode, class: 'form-control input-lg', id: 'addr_postcode'
   .form-group
     %label{ for: 'phone' } Phone
     = f.text_field :phone, class: 'form-control input-lg', id: 'phone'
