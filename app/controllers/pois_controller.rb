@@ -17,7 +17,7 @@ class PoisController < ApplicationController
   end
 
   def new
-    @category = Category.find(params['poi'].delete('category_id'))
+    @category = Category.find(params['poi']['category_id'])
     @poi = Poi.new(poi_params)
     unless @category && @poi.lat && @poi.lon
       redirect_to choose_category_url
@@ -27,9 +27,10 @@ class PoisController < ApplicationController
   def create
     @poi = Poi.new(poi_params)
     @poi.osm_type = 'node'
+    @category = Category.find(params[:poi][:category_id])
     poi_changes = @poi.changes
     if @poi.save
-      @poi.categories << Category.find(params[:category_id]) if params[:category_id]
+      @poi.categories << @category
       OsmUpload.perform_async(current_user.id, @poi.id, poi_changes)
       redirect_to home_url
     else

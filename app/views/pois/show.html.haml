@@ -1,9 +1,10 @@
 %div.add-places
   %h1.modal-title Edit a Place
-%ol.breadcrumb
-  - if @poi.display_category.parent
-    %li= @poi.display_category.parent.name
-  %li= @poi.display_category.name
+- if @poi.display_category
+  %ol.breadcrumb
+    - if @poi.display_category.parent
+      %li= @poi.display_category.parent.name
+    %li= @poi.display_category.name
 = form_for @poi, url: { action: "update" }, html: { role: 'form' } do |f|
   .container
     .row

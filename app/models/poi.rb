@@ -8,6 +8,8 @@ class Poi < ActiveRecord::Base
   validates :osm_type, :name, :lat, :lon, presence: true
   validates :osm_type, inclusion: { in: %w(node way relation) }
 
+  attr_accessor :category_id
+
   scope :closest, lambda { |lat, lon, count=10, distance=1.63|
     select("*,
       (6378*acos(cos(radians(#{lat}))*cos(radians(lat))*
