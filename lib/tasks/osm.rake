@@ -23,6 +23,7 @@ namespace :osm do
             p.lon = latlon['coordinates'][0]
           end
           poi.categories << category unless poi.categories.include? category
+          poi.set_tags
           poi.save if poi.changed?
         end
       end

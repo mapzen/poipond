@@ -24,6 +24,8 @@ class OsmDownload
       :phone => tags[:phone],
       :website => tags[:website]
     )
+    poi.set_tags
+    poi.save
   end
 
 end

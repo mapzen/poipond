@@ -66,6 +66,20 @@ class Poi < ActiveRecord::Base
     hash.symbolize_keys
   end
 
+  def set_tags
+    self.tags[:name] = name unless name.nil?
+    self.tags[:addr_housenumber] = addr_housenumber unless addr_housenumber.nil?
+    self.tags[:addr_street] = addr_street unless addr_street.nil?
+    self.tags[:addr_city] = addr_city unless addr_city.nil?
+    self.tags[:addr_postcode] = addr_postcode unless addr_postcode.nil?
+    self.tags[:phone] = phone unless phone.nil?
+    self.tags[:website] = website unless website.nil?
+    categories.map(&:tags).each { |th| self.tags = tags.merge(th.symbolize_keys) }
+    parents = categories.map(&:parent).compact
+    parents.map(&:tags).each { |th| self.tags = tags.merge(th.symbolize_keys) }
+    self.tags = self.tags.delete_if { |k,v| v.blank? }
+  end
+
   private
 
   def to_xml(changeset)
@@ -83,17 +97,7 @@ class Poi < ActiveRecord::Base
   end
 
   def encode_tags
-    self.tags[:name] = name unless name.nil?
-    self.tags[:addr_housenumber] = addr_housenumber unless addr_housenumber.nil?
-    self.tags[:addr_street] = addr_street unless addr_street.nil?
-    self.tags[:addr_city] = addr_city unless addr_city.nil?
-    self.tags[:addr_postcode] = addr_postcode unless addr_postcode.nil?
-    self.tags[:phone] = phone unless phone.nil?
-    self.tags[:website] = website unless website.nil?
-    categories.map(&:tags).each { |th| self.tags = tags.merge(th.symbolize_keys) }
-    parents = categories.map(&:parent).compact
-    parents.map(&:tags).each { |th| self.tags = tags.merge(th.symbolize_keys) }
-    self.tags = self.tags.delete_if { |k,v| v.blank? }
+    self.set_tags
     xml = ''
     self.tags.each do |k,v|
       key = k.to_s.gsub('_', ':')
