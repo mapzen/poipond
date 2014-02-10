@@ -1,7 +1,6 @@
 class Osm < ActiveRecord::Base
 
   self.abstract_class = true
-  establish_connection("#{Rails.env}_osm")
 
   def self.poi_select_fields
     fields = %w(
@@ -38,3 +37,5 @@ class Osm < ActiveRecord::Base
   end
 
 end
+
+Osm.establish_connection("#{Rails.env}_osm")
