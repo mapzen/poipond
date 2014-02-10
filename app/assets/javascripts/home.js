@@ -4,7 +4,7 @@ function checkIn() {
   $.ajax({
     type: 'GET',
     dataType: "json",
-    url: 'http://localhost:3000/api/v0/pois/closest?lat=' + lat + '&lon=' + lon,
+    url: 'http://poipond.com/api/v0/pois/closest?lat=' + lat + '&lon=' + lon,
     success: function(geoJson) {
       $('#poi-results-list').empty();
       for (key in geoJson) {
