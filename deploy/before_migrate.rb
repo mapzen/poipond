@@ -1,9 +1,10 @@
 Chef::Log.info("Running deploy/before_migrate.rb...")
 
-node[:mapzen_poipond][:custom_cfgs].each do |cfg|
+ node[:mapzen_poipond][:custom_cfgs].each do |cfg|
   Chef::Log.info("Symlinking #{release_path}/config/#{cfg} to #{node[:mapzen_poipond][:cfg_dir]}/#{cfg}")
-  link "#{release_path}/config/#{cfg}" do
-    to "#{node[:mapzen_poipond][:cfg_dir]}/#{cfg}"
-  end
-end
+
+   link "#{release_path}/config/#{cfg}" do
+     to "#{node[:mapzen_poipond][:cfg_dir]}/#{cfg}"
+   end
+ end
 
