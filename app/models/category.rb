@@ -16,8 +16,7 @@ class Category < ActiveRecord::Base
       val = tag[1].gsub("'", "\'")
       "#{key}='#{val}'"
     end
-    sql = sql.uniq * ' AND '
-    "#{sql} AND name IS NOT NULL"
+    sql.uniq * ' AND '
   end
 
 end
