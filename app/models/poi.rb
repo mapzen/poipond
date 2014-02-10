@@ -100,6 +100,7 @@ class Poi < ActiveRecord::Base
     self.set_tags
     xml = ''
     self.tags.each do |k,v|
+      next if osm_type!='node' && (k=='lat' || k=='lon')
       key = k.to_s.gsub('_', ':')
       val = CGI::escapeHTML(v)
       xml << "<tag k=\"#{key}\" v=\"#{val}\"/>"
