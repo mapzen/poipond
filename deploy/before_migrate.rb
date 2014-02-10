@@ -1,13 +1,9 @@
 Chef::Log.info("Running deploy/before_migrate.rb...")
 
 node[:mapzen_poipond][:custom_cfgs].each do |cfg|
-  template "#{shared_path}/config" do
-    source "#{cfg}.erb"
-    mode 0644
-  end
-
+  Chef::Log.info("Symlinking #{release_path}/config/#{cfg} to #{node[:mapzen_poipond][:cfg_dir]}/#{cfg}")
   link "#{release_path}/config/#{cfg}" do
-    to "#{shared_path}/config/#{cfg}"
+    to "#{node[:mapzen_poipond][:cfg_dir]}/#{cfg}"
   end
 end
 
