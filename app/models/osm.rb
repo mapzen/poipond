@@ -1,6 +1,7 @@
 class Osm < ActiveRecord::Base
 
   self.abstract_class = true
+  octopus_establish_connection("#{Rails.env}_osm")
 
   def self.poi_select_fields
     fields = %w(
@@ -38,4 +39,3 @@ class Osm < ActiveRecord::Base
 
 end
 
-Osm.establish_connection("#{Rails.env}_osm")
