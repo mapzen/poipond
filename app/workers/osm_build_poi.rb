@@ -1,4 +1,4 @@
-class OsmSync
+class OsmBuildPoi
 
   include Sidekiq::Worker
 
