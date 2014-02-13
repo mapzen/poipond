@@ -12,8 +12,8 @@ class OsmDownload
     hash = XmlSimple.xml_in(response.body)[poi.osm_type].first.symbolize_keys
     tags = Poi.decode_tags(hash[:tag])
     poi.update_attributes(
-      :lat => hash[:lat],
-      :lon => hash[:lon],
+      :lat => (hash[:lat] || poi.lat),
+      :lon => (hash[:lon] || poi.lon),
       :version => hash[:version],
       :tags => tags,
       :name => tags[:name],
@@ -24,8 +24,6 @@ class OsmDownload
       :phone => tags[:phone],
       :website => tags[:website]
     )
-    poi.set_tags
-    poi.save
   end
 
 end

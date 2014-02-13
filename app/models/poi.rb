@@ -8,6 +8,8 @@ class Poi < ActiveRecord::Base
   validates :osm_type, :name, :lat, :lon, presence: true
   validates :osm_type, inclusion: { in: %w(node way relation) }
 
+  before_save :set_tags
+
   attr_accessor :category_id
 
   scope :closest, lambda { |lat, lon, count=10, distance=1.63|
@@ -66,6 +68,8 @@ class Poi < ActiveRecord::Base
     hash.symbolize_keys
   end
 
+  private
+
   def set_tags
     self.tags[:name] = name unless name.nil?
     self.tags[:addr_housenumber] = addr_housenumber unless addr_housenumber.nil?
@@ -79,8 +83,6 @@ class Poi < ActiveRecord::Base
     parents.map(&:tags).each { |th| self.tags = tags.merge(th.symbolize_keys) }
     self.tags = self.tags.delete_if { |k,v| v.blank? }
   end
-
-  private
 
   def to_xml(changeset)
     xml = "<osm>"
