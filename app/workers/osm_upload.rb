@@ -1,6 +1,7 @@
 class OsmUpload
 
   include Sidekiq::Worker
+  sidekiq_options :queue => :upload
 
   def perform(user_id, poi_id, poi_changes)
     user = User.find(user_id)
