@@ -12,7 +12,7 @@ class Category < ActiveRecord::Base
   def sql_where
     return if tags.empty?
     sql = tags.map do |tag|
-      key = tag.first
+      key = "\"#{tag.first}\""
       val = tag[1].gsub("'", "\'")
       "#{key}='#{val}'"
     end
