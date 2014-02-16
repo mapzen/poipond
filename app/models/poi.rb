@@ -4,6 +4,8 @@ class Poi < ActiveRecord::Base
 
   has_many :poi_categories
   has_many :categories, through: :poi_categories
+  has_many :changesets, -> { order('changesets.created_at DESC') }
+  has_many :users, -> { distinct }, :through => :changesets
 
   validates :osm_type, :name, :lat, :lon, presence: true
   validates :osm_type, inclusion: { in: %w(node way relation) }
