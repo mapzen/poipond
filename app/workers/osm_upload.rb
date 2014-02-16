@@ -20,7 +20,7 @@ class OsmUpload
         # failed? download again from osm api, maybe a version conflict
         OsmDownload.new.perform(user.id, poi.id)
         # and update with the new changes
-        poi.update_attributes(
+        poi.update_attributes!(
           :name => updated_attributes['name'],
           :addr_housenumber => updated_attributes['addr_housenumber'],
           :addr_street => updated_attributes['addr_street'],
@@ -29,7 +29,6 @@ class OsmUpload
           :phone => updated_attributes['phone'],
           :website => updated_attributes['website']
         )
-        poi.reload
         # and try again...
         poi.update_osm_poi(user, poi_changes)
       end
