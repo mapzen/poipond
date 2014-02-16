@@ -6,13 +6,13 @@ class OsmUpload
   def perform(user_id, poi_id, poi_changes)
     user = User.find(user_id)
     poi = Poi.find(poi_id)
+    updated_attributes = poi.attributes
     return if poi.osm_id.to_i < 0
     if poi.osm_id.nil?
       # create a new record if no osm_id
       poi.create_osm_poi(user, poi_changes)
     else
       # otherwise update the existing record
-      updated_attributes = poi.attributes
       begin
         # try to update
         poi.update_osm_poi(user, poi_changes)
