@@ -19,6 +19,7 @@ class OsmUpload
       rescue
         # failed? download again from osm api, maybe a version conflict
         OsmDownload.new.perform(user.id, poi.id)
+        poi.reload
         # and update with the new changes
         poi.update_attributes!(
           :name => updated_attributes['name'],
