@@ -19,7 +19,8 @@ class Poi < ActiveRecord::Base
       sin(radians(lat)))) AS distance").
     where("lat BETWEEN #{lat-(distance/111.045)} AND #{lat+(distance/111.045)} AND
            lon BETWEEN #{lon}-(#{distance}/(111.045 * COS(RADIANS(#{lat})))) AND
-                       #{lon}+(#{distance}/(111.045 * COS(RADIANS(#{lat}))))").
+                       #{lon}+(#{distance}/(111.045 * COS(RADIANS(#{lat}))))
+           AND osm_id > 0").
     order('distance').
     limit(count)
   }
