@@ -6,14 +6,14 @@ class OsmBuildPoi
     category = Category.find(category_id)
     latlon = JSON.parse(osm_poi['st_asgeojson'])
     poi = Poi.where(osm_id: osm_poi['osm_id'], osm_type: osm_type).first_or_create do |p|
-      p.name = utf8_enforce(osm_poi['name'])
-      p.name = utf8_enforce(category.name) if p.name.blank?
-      p.addr_housenumber = utf8_enforce(osm_poi['addr:housenumber'])
-      p.addr_street = utf8_enforce(osm_poi['addr:street'])
-      p.addr_city = utf8_enforce(osm_poi['addr:city'])
-      p.addr_postcode = utf8_enforce(osm_poi['addr:postcode'])
-      p.phone = utf8_enforce(osm_poi['phone'])
-      p.website = utf8_enforce(osm_poi['website'])
+      p.name = osm_poi['name']
+      p.name = category.name if p.name.blank?
+      p.addr_housenumber = osm_poi['addr:housenumber']
+      p.addr_street = osm_poi['addr:street']
+      p.addr_city = osm_poi['addr:city']
+      p.addr_postcode = osm_poi['addr:postcode']
+      p.phone = osm_poi['phone']
+      p.website = osm_poi['website']
       p.lat = latlon['coordinates'][1]
       p.lon = latlon['coordinates'][0]
     end
@@ -22,10 +22,5 @@ class OsmBuildPoi
   end
 
   private
-
-  def utf8_enforce(str)
-    return if str.nil?
-    str.encode('utf-8', 'binary', invalid: :replace, undef: :replace, replace: '')
-  end
 
 end
