@@ -12,7 +12,7 @@ class Poi < ActiveRecord::Base
 
   attr_accessor :category_id
 
-  scope :closest, lambda { |lat, lon, count=10, distance=1.63|
+  scope :closest, lambda { |lat, lon, count=20, distance=(1.63*2)|
     select("*,
       (6378*acos(cos(radians(#{lat}))*cos(radians(lat))*
       cos(radians(lon)-radians(#{lon}))+sin(radians(#{lat}))*
