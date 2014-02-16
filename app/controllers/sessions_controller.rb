@@ -5,6 +5,7 @@ class SessionsController < ApplicationController
     if user = User.find_by_provider_and_uid(auth[:provider], auth[:uid])
       user.update_attributes(auth)
       session[:user_id] = user.id
+      cookies.permanent.signed[:permanent_user_id] = user.id
       redirect_to home_url
     else
       session[:auth_hash] = auth

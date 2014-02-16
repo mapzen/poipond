@@ -6,8 +6,8 @@ class ApplicationController < ActionController::Base
   before_filter :set_cors_headers
 
   def current_user
-    return unless session[:user_id]
-    @current_user ||= User.find(session[:user_id])
+    return unless cookies.signed[:permanent_user_id] || session[:user_id]
+    @current_user ||= User.find(cookies.signed[:permanent_user_id] || session[:user_id])
   end
   helper_method :current_user
 
