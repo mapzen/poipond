@@ -5,7 +5,7 @@ class OsmBuildPoi
   def perform(osm_type, osm_poi, category_id)
     category = Category.find(category_id)
     latlon = JSON.parse(osm_poi['st_asgeojson'])
-    poi = Poi.where(osm_id: osm_poi['osm_id'], osm_type: osm_type).first_or_create do |p|
+    poi = Poi.where(osm_id: osm_poi['osm_id'], osm_type: osm_type).first_or_create! do |p|
       p.name = osm_poi['name']
       p.name = category.name if p.name.blank?
       p.addr_housenumber = osm_poi['addr:housenumber']
