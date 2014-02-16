@@ -69,8 +69,6 @@ class Poi < ActiveRecord::Base
     hash.symbolize_keys
   end
 
-  private
-
   def set_tags
     self.tags[:name] = name unless name.nil?
     self.tags[:addr_housenumber] = addr_housenumber unless addr_housenumber.nil?
@@ -84,6 +82,8 @@ class Poi < ActiveRecord::Base
     parents.map(&:tags).each { |th| self.tags = tags.merge(th.symbolize_keys) }
     self.tags = self.tags.delete_if { |k,v| v.blank? }
   end
+
+  private
 
   def to_xml(changeset)
     xml = "<osm>"
