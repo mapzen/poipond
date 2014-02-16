@@ -20,7 +20,7 @@ class OsmDownload
         :lon => (hash[:lon] || poi.lon),
         :version => hash[:version],
         :tags => tags,
-        :name => tags[:name],
+        :name => (tags[:name] || poi.display_category.name),
         :addr_housenumber => tags[:addr_housenumber],
         :addr_street => tags[:addr_street],
         :addr_city => tags[:addr_city],
