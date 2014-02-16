@@ -60,6 +60,7 @@ class Poi < ActiveRecord::Base
   end
 
   def self.decode_tags(tags)
+    return unless tags
     hash = {}
     tags.each do |tag|
       key = tag['k'].gsub(':', '_')
