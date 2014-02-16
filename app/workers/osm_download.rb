@@ -14,7 +14,7 @@ class OsmDownload
       poi.update_attributes(:osm_id=>"-#{poi.osm_id}")
     else
       hash = XmlSimple.xml_in(response.body)[poi.osm_type].first.symbolize_keys
-      tags = Poi.decode_tags(hash[:tag])
+      return unless tags = Poi.decode_tags(hash[:tag])
       poi.update_attributes(
         :lat => (hash[:lat] || poi.lat),
         :lon => (hash[:lon] || poi.lon),
