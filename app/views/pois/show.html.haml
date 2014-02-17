@@ -1,39 +1,18 @@
-%div.add-places
-  %h1.modal-title Edit a Place
-- if @poi.display_category
-  %ol.breadcrumb
-    - if @poi.display_category.parent
-      %li= @poi.display_category.parent.name
-    %li= @poi.display_category.name
-= form_for @poi, url: { action: "update" }, html: { role: 'form' } do |f|
-  .container
-    .row
-      .col-md-8
-        .form-group
-          %label{ for: 'name' } Name
-          = f.text_field :name, class: 'form-control input-lg', id: 'name'
-        .form-group
-          %label{ for: 'addr_housenumber' } Housenumber
-          = f.text_field :addr_housenumber, class: 'form-control input-lg', id: 'addr_housenumber'
-        .form-group
-          %label{ for: 'addr_street' } Street
-          = f.text_field :addr_street, class: 'form-control input-lg', id: 'addr_street'
-        .form-group
-          %label{ for: 'addr_city' } City
-          = f.text_field :addr_city, class: 'form-control input-lg', id: 'addr_city'
-        .form-group
-          %label{ for: 'addr_postcode' } Postcode
-          = f.text_field :addr_postcode, class: 'form-control input-lg', id: 'addr_postcode'
-        .form-group
-          %label{ for: 'phone' } Phone
-          = f.text_field :phone, class: 'form-control input-lg', id: 'phone'
-        .form-group
-          %label{ for: 'website' } Website
-          = f.text_field :website, class: 'form-control input-lg', id: 'website'
-      .col-md-4
-        #poi-map
-        %script
-          var map = L.mapbox.map('poi-map', 'randyme.h29f04e6', { center:[#{@poi.lat}, #{@poi.lon}], zoom: 19});
-          var marker = L.marker([#{@poi.lat}, #{@poi.lon}], { color: '#000' });
-          marker.addTo(map);
-        %button.btn.btn-warning.btn-lg.btn-block Update POI
+.add-places
+  %h1.modal-title= @poi.name
+  - if @poi.display_category
+    %ol.breadcrumb
+      - if @poi.display_category.parent
+        %li= @poi.display_category.parent.name
+      %li= @poi.display_category.name
+    %p= link_to 'Edit', edit_poi_url(@poi)
+    %p== Address: #{@poi.addr_housenumber} #{@poi.addr_street}
+    %p== City: #{@poi.addr_city}
+    %p== Postcode: #{@poi.addr_postcode}
+    %p== Phone: #{@poi.phone}
+    %p== Website: #{@poi.website}
+  #poi-map
+  %script
+    var map = L.mapbox.map('poi-map', 'randyme.h29f04e6', { center:[#{@poi.lat}, #{@poi.lon}], zoom: 19});
+    var marker = L.marker([#{@poi.lat}, #{@poi.lon}], { color: '#000' });
+    marker.addTo(map);

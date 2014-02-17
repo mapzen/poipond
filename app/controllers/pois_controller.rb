@@ -4,13 +4,17 @@ class PoisController < ApplicationController
     @poi = Poi.find(params[:id])
   end
 
+  def edit
+    @poi = Poi.find(params[:id])
+  end
+
   def update
     @poi = Poi.find(params[:id])
     @poi.assign_attributes(poi_params)
     poi_changes = @poi.changes
     if @poi.save
       OsmUpload.perform_async(current_user.id, @poi.id, poi_changes)
-      redirect_to home_url
+      redirect_to @poi
     else
       render :edit
     end
@@ -32,7 +36,7 @@ class PoisController < ApplicationController
     if @poi.save
       @poi.categories << @category
       OsmUpload.perform_async(current_user.id, @poi.id, poi_changes)
-      redirect_to home_url
+      redirect_to @poi
     else
       render :new
     end
