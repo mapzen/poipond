@@ -2,6 +2,15 @@ class UsersController < ApplicationController
 
   skip_before_filter :verify_authenticity_token, :only => [:create]
 
+  def show
+    @user = User.find_by_display_name(params[:display_name])
+  end
+
+  def pois
+    @user = User.find_by_display_name(params[:display_name])
+    @pois = @user.pois
+  end
+
   def new
     @user = User.new
   end

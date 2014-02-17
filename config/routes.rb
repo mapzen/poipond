@@ -3,10 +3,13 @@ Poipond::Application.routes.draw do
   root 'home#index', as: 'home'
 
   get '/signup' => 'users#new', as: :signup
-  post '/users/create' => 'users#create', as: :create_user
   get '/auth/:provider/callback' => 'sessions#create'
   post '/sessions/create' => 'sessions#create', as: :login
   get '/logout' => 'sessions#destroy', as: :logout
+
+  post '/users/create' => 'users#create', as: :create_user
+  get '/users/:display_name' => 'users#show', as: :user
+  get '/users/:display_name/pois' => 'users#pois', as: :user_pois
 
   resources :pois
   get '/pois/new/choose_category(/:category_id)' => 'pois#choose_category', as: :choose_category

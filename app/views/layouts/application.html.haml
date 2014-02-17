@@ -21,17 +21,19 @@
     #map
     %nav.navbar.navbar-default.navbar-fixed_top{ :role=>'navigation' }
       %div.navbar-header
-        %button.navbar-toggle{ :type=>'button', :'data-toggle'=>'collapse', :'data-target'=>'#navcoll' }
-          %span.sr-only Toggle navigation
-          %span.icon-bar
-          %span.icon-bar
-          %span.icon-bar
+        - if current_user
+          %button.navbar-toggle{ :type=>'button', :'data-toggle'=>'collapse', :'data-target'=>'#navcoll' }
+            %span.sr-only Toggle navigation
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
         %a.navbar-brand{ :href=>'/' }
           = image_tag('logo.png')
       %div.collapse.navbar-collapse#navcoll
         - if current_user
           %ul.nav.navbar-nav.navbar-right
-            %li
-              %a{ :href=> logout_url } Log out
+            %li= link_to current_user.display_name, user_url(current_user.display_name)
+            %li= link_to 'My POIs', user_pois_url(current_user.display_name)
+            %li= link_to 'Log out', logout_url
     .container
       = yield
