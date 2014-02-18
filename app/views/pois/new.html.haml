@@ -34,5 +34,6 @@
   = f.hidden_field :lat
   = f.hidden_field :lon
   = f.hidden_field :category_id, :value=>@category.id
-  %button.btn.btn-warning.btn-lg.btn-block Create POI
+  - if current_user
+    %button.btn.btn-warning.btn-lg.btn-block Create POI
   %button.btn.btn-lg.btn-block.btn-link{ type: 'cancel' } Cancel

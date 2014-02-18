@@ -1,11 +1,8 @@
 .add-places
-  %h1.modal-title= @poi.name
+  %h1.modal-title#poi-results-label= @poi.name
+  %p.pull-right= link_to 'Edit', edit_poi_url(@poi)
   - if @poi.display_category
-    %ol.breadcrumb
-      - if @poi.display_category.parent
-        %li= @poi.display_category.parent.name
-      %li= @poi.display_category.name
-    %p= link_to 'Edit', edit_poi_url(@poi)
+    %p== Category: #{@poi.display_category.parent.name} #{@poi.display_category.name}
     %p== Address: #{@poi.addr_housenumber} #{@poi.addr_street}
     %p== City: #{@poi.addr_city}
     %p== Postcode: #{@poi.addr_postcode}
