@@ -1,1 +1,12 @@
-%h1= @user.display_name
+.jumbotron
+  %h1
+    Hi there,
+    %i= @user.display_name
+    !
+  %h3 Score:
+  %br
+  %h4 Recent Activity 
+  %hr
+  %ul
+  - @pois.each do |poi|
+    %li= link_to poi.name, poi

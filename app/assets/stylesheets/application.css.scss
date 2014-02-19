@@ -20,6 +20,10 @@ h1 {
   margin-top: 0px;
 }
 
+.user-profile {
+  background-color: rgba(255,255,255,.8);
+}
+
 .add-places h1 {
   color: #9a9a9a;
   font-size: 18px;
@@ -72,6 +76,7 @@ h6 {
 .btn-warning {
   border-color: #ACACAC;
   background-color: #FF530B;
+  margin-top: 15px;
 }
 
 .btn-warning:hover {
@@ -141,7 +146,12 @@ h6 {
 .modal-content .modal-body {
   background-color:#c4c4c4;
   color:#FFF;
-  padding: 10px 15px 10px 15px;
+  padding: 10px 5px 10px 15px;
+  vertical-align: middle;
+}
+
+.modal-body .btn-warning {
+  margin-top: 0px;
 }
 
 .poi-categories .list-group-item {
