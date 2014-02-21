@@ -1,8 +1,11 @@
 .add-places
+  %div.modal-header
   %h1.modal-title#poi-results-label= @poi.name
-  %p.pull-right= link_to 'Edit', edit_poi_url(@poi)
+    %span.pull-right.list-group-item
+      %a= link_to 'Edit', edit_poi_url(@poi)
+        = image_tag('edit_poi.png')
   - if @poi.display_category
-    %p== Category: #{@poi.display_category.parent.name} #{@poi.display_category.name}
+    %p== Category: #{@poi.display_category.parent.name} #| #{@poi.display_category.name}
     %p== Address: #{@poi.addr_housenumber} #{@poi.addr_street}
     %p== City: #{@poi.addr_city}
     %p== Postcode: #{@poi.addr_postcode}
@@ -13,3 +16,5 @@
     var map = L.mapbox.map('poi-map', 'randyme.h29f04e6', { center:[#{@poi.lat}, #{@poi.lon}], zoom: 19});
     var marker = L.marker([#{@poi.lat}, #{@poi.lon}], { color: '#000' });
     marker.addTo(map);
+
+

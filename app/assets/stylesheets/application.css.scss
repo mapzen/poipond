@@ -4,6 +4,11 @@ body {
   padding-bottom: 70px; 
 }
 
+hr {
+  margin: 0;
+  border-top-color: rgba(196,196,196,1);
+}
+
 .jumbotron {
   padding: 20px;
 }
@@ -25,10 +30,16 @@ h1 {
 }
 
 .add-places h1 {
-  color: #9a9a9a;
+  color: rgba(154,154,154,1);
   font-size: 18px;
   font-weight: 500;
   margin: 0px;
+}
+
+.add-places p {
+  margin: 0;
+  padding: 0;
+  line-height: 1em;
 }
 
 .modal-header h1 {
@@ -45,6 +56,13 @@ h2 {
 h3 {
   font-weight: 500;
   margin-top: 0px;
+}
+
+h4 {
+  font-size: 18px;
+  color: rgba(154,154,154,1);
+  font-weight: 500;
+  margin-top: 20px;
 }
 
 h5 {
@@ -137,6 +155,7 @@ h6 {
 #poi-map {
   width: 100%;
   height: 300px;
+  margin-top: 15px;
 }
 
 .modal-footer {
@@ -190,7 +209,6 @@ h6 {
   height: 75px;
   color:#ff530b;
 }
-
 
 .pick-category {
   padding-top: 5px;
