@@ -1,11 +1,13 @@
 .add-places
   %div.modal-header
-  %h1.modal-title#poi-results-label= @poi.name
-    %span.pull-right.list-group-item
-      %a= link_to 'Edit', edit_poi_url(@poi)
+    %h1.modal-title#poi-results-label
+      = @poi.name
+      %span.pull-right.list-group-item
         = image_tag('edit_poi.png')
+        %a= link_to 'Edit', edit_poi_url(@poi)
+  %div.poi-info
   - if @poi.display_category
-    %p== Category: #{@poi.display_category.parent.name} #| #{@poi.display_category.name}
+    %p==Category: #{@poi.display_category.parent.name} | #{@poi.display_category.name}
     %p== Address: #{@poi.addr_housenumber} #{@poi.addr_street}
     %p== City: #{@poi.addr_city}
     %p== Postcode: #{@poi.addr_postcode}

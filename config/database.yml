@@ -9,9 +9,9 @@ development:
 development_osm:
   adapter: postgresql
   encoding: unicode
-  database: osm-nyc
+  database: gis
   pool: 5
-  username: randy
-  password: 
+  username: gisuser
+  password: password
   host: localhost
   port: 5432

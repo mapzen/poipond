@@ -39,7 +39,7 @@ h1 {
 .add-places p {
   margin: 0;
   padding: 0;
-  line-height: 1em;
+  
 }
 
 .modal-header h1 {
@@ -47,6 +47,10 @@ h1 {
   color: #000;
   font-weight: 500;
   margin: 0px;
+}
+
+.add-places .modal-header {
+  padding: 0 0 15px 0;
 }
 
 h2 {
@@ -184,10 +188,17 @@ h6 {
   margin-top: -2px;
   border-radius: 15px;
   background-color: #c4c4c4;
+  width: 30px;
+  height: 30px;
 }
 
 .list-group-item img:hover {
   background-color: #ff530b;
+}
+
+.list-group-item {
+  border: 0;
+  padding: 0;
 }
 
 .poi-categories .list-group a:hover {
@@ -208,6 +219,14 @@ h6 {
 #poi-results-list a:hover {
   height: 75px;
   color:#ff530b;
+}
+
+.poi-info {
+  margin-top: 15px;
+}
+
+.show-pois li {
+  padding-bottom: 10px;
 }
 
 .pick-category {
