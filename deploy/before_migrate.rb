@@ -7,3 +7,9 @@ node[:mapzen_poipond][:custom_cfgs].each do |cfg|
     to "#{node[:mapzen_poipond][:cfg_dir]}/#{cfg}"
   end
 end
+
+template "#{node[:deploy][:poipond][:deploy_to]}/shared/config/database.yml" do
+  source 'database.yml.erb'
+  mode 0644
+  owner 'www-data'
+end
