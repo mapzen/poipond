@@ -8,10 +8,10 @@ node[:mapzen_poipond][:custom_cfgs].each do |cfg|
   end
 end
 
-template "#{node[:deploy][:poipond][:deploy_to]}/shared/config/database.yml" do
-  cookbook 'mapzen_poipond'
-  source 'database.yml.erb'
-  mode 0644
-  owner 'www-data'
-  only_if { node[:opsworks][:instance][:layers].include? 'rails-app' }
-end
+#template "#{node[:deploy][:poipond][:deploy_to]}/shared/config/database.yml" do
+#  cookbook 'mapzen_poipond'
+#  source 'database.yml.erb'
+#  mode 0644
+#  owner 'www-data'
+#  only_if { node[:opsworks][:instance][:layers].include? 'rails-app' }
+#end
