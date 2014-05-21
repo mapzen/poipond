@@ -13,4 +13,5 @@ template "#{node[:deploy][:poipond][:deploy_to]}/shared/config/database.yml" do
   source 'database.yml.erb'
   mode 0644
   owner 'www-data'
+  only_if { node[:opsworks][:instance][:layers].include? 'rails-app' }
 end
