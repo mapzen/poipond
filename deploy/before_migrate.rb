@@ -9,9 +9,9 @@ node[:mapzen_poipond][:custom_cfgs].each do |cfg|
 end
 
 template "#{node[:deploy][:poipond][:deploy_to]}/shared/config/database.yml" do
-  cookbook 'mapzen_poipond'
-  source 'database.yml.erb'
-  mode 0644
-  owner 'www-data'
+  cookbook  'mapzen_poipond'
+  source    'database.yml.erb'
+  owner     'www-data'
+  mode      0644
   only_if { node[:hostname] =~ /^rails-app/ }
 end
