@@ -15,3 +15,12 @@ template "#{node[:deploy][:poipond][:deploy_to]}/shared/config/database.yml" do
   mode      0644
   only_if { node[:hostname] =~ /^rails-app/ }
 end
+
+rails_env = new_resource.environment["RAILS_ENV"]
+
+Chef::Log.info("Precompiling assets for RAILS_ENV=#{rails_env}...")
+execute "rake assets:precompile" do
+  cwd release_path
+  command "bundle exec rake assets:precompile"
+  environment "RAILS_ENV" => rails_env
+end
