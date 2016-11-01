@@ -24,4 +24,4 @@ group :doc do
   gem 'sdoc', require: false
 end
 
-gem 'debugger', group: :development
+# gem 'debugger', group: :development
