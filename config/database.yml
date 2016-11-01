@@ -1,4 +1,14 @@
 development:
+  adapter: postgresql
+  encoding: unicode
+  database: poipond
+  pool: 5
+  username: poipond
+  password: poipond
+  host: db
+  port: 5432
+
+development_old:
   adapter: mysql2
   encoding: utf8
   database: poipond_development
