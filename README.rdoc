@@ -1,18 +1,19 @@
 == README
 
-# POI Pond
+== POI Pond
 
-## What does POI Pond do?
+
+=== What does POI Pond do?
 POI Pond is an editor for OpenStreetMap (OSM) points of interest (POI) data. It let's you check in to existing places so OSM can know they are still alive and kicking. You can also add missing places and edit existing ones with a simple form.
 
 POI Pond was designed to work on a mobile device while you are out about livin' life!
 
-## How to use this repo
+=== How to use this repo
 
 1. clone this repo.
 
 
-## License
+=== License
 
 This README would normally document whatever steps are necessary to get the
 application up and running.
