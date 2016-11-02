@@ -17,8 +17,8 @@ POI Pond was designed to work on a mobile device while you are out about livin' 
 4. In separate tab
 
   ```
-  docker exec poipond rake db:create
-  docker exec poipond rake db:migrate
+  docker exec poipond_poipond_1 rake db:create
+  docker exec poipond_poipond_1 rake db:migrate
   ```
 
 5. Go to
