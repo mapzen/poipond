@@ -1,7 +1,7 @@
 @import "bootstrap";
 
 body {
-  padding-bottom: 70px; 
+  padding-bottom: 70px;
 }
 
 hr {
@@ -39,7 +39,7 @@ h1 {
 .add-places p {
   margin: 0;
   padding: 0;
-  
+
 }
 
 .modal-header h1 {
@@ -143,11 +143,10 @@ h6 {
   background-color: #fff;
 }
 
-#map {
-  position:absolute;
-  width: 100%;
+#map{
   height: 100%;
-  z-index: -1;
+  width: 100%;
+  position: absolute;
 }
 
 .label-info {
@@ -261,7 +260,7 @@ h6 {
 
 .breadcrumb {
   margin-top: 0px;
-  background-color: #c4c4c4; 
+  background-color: #c4c4c4;
   color: #fff;
 }
 
@@ -271,7 +270,7 @@ h6 {
 }
 
 .help-block {
-  margin: 0px; 
+  margin: 0px;
   font-size: 12px;
   color: #9a9a9a;
 }
