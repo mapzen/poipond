@@ -6,18 +6,23 @@ POI Pond is an editor for OpenStreetMap (OSM) points of interest (POI) data. It 
 
 POI Pond was designed to work on a mobile device while you are out about livin' life!
 
-## Setup with docker
+### Setup with docker
+1. [Install Docker](https://www.docker.com/products/overview)
+2. clone this repo
+3. On a Mac, in the terminal, go to the poipond repo
+  ```
+  docker-compose up
+  ```
 
-```
-docker-compose up
-```
+4. In separate tab
 
-In separate tab:
-```
-docker exec poipond rake db:create
-docker exec poipond rake db:migrate
-```
-Go to
-```
-localhost:3000
-```
+  ```
+  docker exec poipond rake db:create
+  docker exec poipond rake db:migrate
+  ```
+
+5. Go to
+
+  ```
+  localhost:3000
+  ```
