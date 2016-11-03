@@ -22,13 +22,8 @@ function checkIn() {
 }
 
 $(document).ready(function() {
-  map = L.Mapzen.map('map', {
-    zoomControl:false,
-    center: [40.74429, -73.99035],
-    zoom: 15,
-    scene: L.Mapzen.BasemapStyles.Refill
-  });
-  map.locate({setView: true, maxZoom: 16});
+  map = L.Mapzen.map('map');
+  map.setView([37.7749, -122.4194], 12);
   map.on('locationfound', function (e) {
     var radius = e.accuracy / 2;
     for (i=0; i<markers.length; i++) {
